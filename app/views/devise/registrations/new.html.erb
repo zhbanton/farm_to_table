@@ -1,7 +1,16 @@
 <h2>Sign up</h2>
 
+<%
+  params[:user][:user_type] ||= 'farm'
 
-<% resource.rolable = params[:user][:user_type].camelize.constantize.new if resource.rolable.nil? %>
+  if User::USER_TYPES.include? params[:user][:user_type].downcase
+    user_type = params[:user][:user_type].downcase
+  else
+    user_type = "farm"
+  end
+
+  resource.rolable = user_type.camelize.constantize.new if resource.rolable.nil?
+%>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -41,11 +50,11 @@
     <%= f.telephone_field :phone_number %>
   </div>
 
-  <%= hidden_field :user, :user_type, :value => params[:user][:user_type] %>
+  <%= hidden_field :user, :user_type, value: user_type %>
 
   <div>
     <%= fields_for resource.rolable do |rf| %>
-      <% render "#{params[:user][:user_type]}_fields", f: rf %>
+      <% render "#{user_type}_fields", f: rf %>
     <% end %>
   </div>
 

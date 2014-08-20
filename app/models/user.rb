@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :rolable, polymorphic: true
-  accepts_nested_attributes_for :rolable
+
+  USER_TYPES = ['farm', 'organization']
 
 end
