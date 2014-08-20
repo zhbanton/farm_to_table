@@ -4,7 +4,11 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     child_class = params[:user][:user_type].camelize.constantize
-    resource.rolable = child_class.new(farm_params)
+    if params[:user][:user_type] == 'farm'
+      resource.rolable = child_class.new(farm_params)
+    elsif params[:user][:user_type] == 'organization'
+      resource.rolable = child_class.new(organization_params)
+    end
 
     valid = resource.valid?
     valid = resource.rolable.valid? && valid
@@ -48,4 +52,9 @@ class RegistrationsController < Devise::RegistrationsController
   def farm_params
     params.require(:farm).permit(:minimum_order)
   end
+
+  def organization_params
+    params.require(:organization).permit(:business_type)
+  end
+
 end
