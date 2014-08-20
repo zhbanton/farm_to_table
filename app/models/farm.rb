@@ -9,5 +9,7 @@
 #
 
 class Farm < ActiveRecord::Base
-  has_one :user, as: :loginable
+  has_one :user, as: :rolable
+
+  validates :minimum_order, numericality: true
 end

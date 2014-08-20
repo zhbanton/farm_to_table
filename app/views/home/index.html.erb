@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  signed in as <%= current_user.email %>
+  <%= link_to 'logout', destroy_user_session_path, method: :delete %>
+<% end %>
+<%= link_to 'sign up as a farm', farm_sign_up_path %>
+<%= link_to 'sign up as an organization', organization_sign_up_path %>

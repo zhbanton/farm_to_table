@@ -15,12 +15,12 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
-#  loginable_id           :integer
-#  loginable_type         :string(255)
 #  name                   :string(255)      not null
 #  description            :text
 #  website                :string(255)
 #  phone_number           :integer
+#  rolable_id             :integer
+#  rolable_type           :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -29,5 +29,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :loginable, polymorphic: true
+  belongs_to :rolable, polymorphic: true
+  accepts_nested_attributes_for :rolable
+
 end

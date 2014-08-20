@@ -9,5 +9,5 @@
 #
 
 class Organization < ActiveRecord::Base
-  has_one :user, as: :loginable
+  has_one :user, as: :rolable
 end
