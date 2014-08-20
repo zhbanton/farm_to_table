@@ -1,9 +1,7 @@
 <h2>Sign up</h2>
 
 <%
-  params[:user][:user_type] ||= 'farm'
-
-  if User::USER_TYPES.include? params[:user][:user_type].downcase
+  if params.has_key?(:user) && params[:user].has_key?(:user_type) && User::USER_TYPES.include?(params[:user][:user_type].downcase)
     user_type = params[:user][:user_type].downcase
   else
     user_type = "farm"
