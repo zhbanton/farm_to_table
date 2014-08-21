@@ -33,4 +33,6 @@ class User < ActiveRecord::Base
 
   belongs_to :rolable, polymorphic: true
 
+  validates :name, presence: true
+
 end

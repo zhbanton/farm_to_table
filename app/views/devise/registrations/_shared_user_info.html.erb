@@ -1,0 +1,25 @@
+<div>
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</div>
+
+<div>
+  <%= f.label :description %><br />
+  <%= f.text_area :description %>
+</div>
+
+<div>
+  <%= f.label :website %><br />
+  <%= f.url_field :website %>
+</div>
+
+<div>
+  <%= f.label :phone_number %><br />
+  <%= f.telephone_field :phone_number %>
+</div>
+
+<div>
+  <%= fields_for resource.rolable do |rf| %>
+    <% render "#{user_type}_fields", f: rf %>
+  <% end %>
+</div>
