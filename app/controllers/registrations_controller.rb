@@ -13,9 +13,8 @@ class RegistrationsController < Devise::RegistrationsController
     valid = resource.valid?
     valid = resource.rolable.valid? && valid
 
-    resource_saved = resource.save
     yield resource if block_given?
-    if valid && resource_saved
+    if valid && resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
