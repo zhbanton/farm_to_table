@@ -24,13 +24,13 @@
 #
 
 class User < ActiveRecord::Base
+
+  USER_TYPES = ['farm', 'organization']
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :rolable, polymorphic: true
-
-  USER_TYPES = ['farm', 'organization']
 
 end
