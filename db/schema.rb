@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820181732) do
+ActiveRecord::Schema.define(version: 20140821034320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "business_hours", force: true do |t|
+    t.integer  "day"
+    t.string   "opening_time"
+    t.string   "closing_time"
+    t.integer  "farm_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "business_hours", ["farm_id"], name: "index_business_hours_on_farm_id", using: :btree
 
   create_table "farms", force: true do |t|
     t.decimal  "minimum_order"
