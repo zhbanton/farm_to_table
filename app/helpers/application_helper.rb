@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def my_devise_error_messages!
     return "" if resource.errors.empty? && resource.rolable.errors.empty?
 
@@ -27,5 +26,4 @@ module ApplicationHelper
 
     html.html_safe
   end
-
 end
