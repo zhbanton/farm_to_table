@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :rolable, polymorphic: true
+  belongs_to :rolable, polymorphic: true, dependent: :destroy
 
   validates :name, presence: true
 
