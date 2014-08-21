@@ -18,7 +18,7 @@
 #  name                   :string(255)      not null
 #  description            :text
 #  website                :string(255)
-#  phone_number           :integer
+#  phone_number           :string(255)
 #  rolable_id             :integer
 #  rolable_type           :string(255)
 #

@@ -28,33 +28,9 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-
-  <div>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-
-  <div>
-    <%= f.label :website %><br />
-    <%= f.url_field :website %>
-  </div>
-
-  <div>
-    <%= f.label :phone_number %><br />
-    <%= f.telephone_field :phone_number %>
-  </div>
+  <%= render 'shared_user_info', f: f, user_type: user_type %>
 
   <%= hidden_field :user, :user_type, value: user_type %>
-
-  <div>
-    <%= fields_for resource.rolable do |rf| %>
-      <% render "#{user_type}_fields", f: rf %>
-    <% end %>
-  </div>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

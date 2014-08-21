@@ -78,7 +78,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def farm_params
-    params.require(:farm).permit(:minimum_order)
+    params.require(:farm).permit(:minimum_order, business_hours_attributes: [:id, :day, :opening_time, :closing_time, :_destroy])
   end
 
   def organization_params
