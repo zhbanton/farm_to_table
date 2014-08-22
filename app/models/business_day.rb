@@ -12,7 +12,7 @@
 #  updated_at   :datetime
 #
 
-class BusinessHour < ActiveRecord::Base
+class BusinessDay < ActiveRecord::Base
 
   belongs_to :farm
 

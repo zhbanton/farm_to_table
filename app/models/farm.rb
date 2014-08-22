@@ -11,8 +11,8 @@
 class Farm < ActiveRecord::Base
 
   has_one :user, as: :role
-  has_many :business_hours, dependent: :destroy
-  accepts_nested_attributes_for :business_hours, reject_if: proc { |attributes| attributes['opening_time'].empty? || attributes['closing_time'].empty? }, allow_destroy: true
+  has_many :business_days, dependent: :destroy
+  accepts_nested_attributes_for :business_days, reject_if: proc { |attributes| attributes['opening_time'].empty? || attributes['closing_time'].empty? }, allow_destroy: true
 
   validates :minimum_order, numericality: true
 

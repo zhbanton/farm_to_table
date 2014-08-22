@@ -4,11 +4,11 @@
     <%= f.text_field :minimum_order %>
   </div>
   <div>
-    <%= f.fields_for :business_hours, @business_hours do |bh| %>
-      <%= bh.label :day, bh.object.day %>
-      <%= bh.hidden_field :day, value: bh.object.day %>
-      <%= bh.select :opening_time, available_hours %>
-      <%= bh.select :closing_time, available_hours %>
+    <%= f.fields_for :business_days, @business_days do |bd| %>
+      <%= bd.label :day, bd.object.day %>
+      <%= bd.hidden_field :day, value: bd.object.day %>
+      <%= bd.select :opening_time, available_hours %>
+      <%= bd.select :closing_time, available_hours %>
       <br>
     <% end %>
   </div>

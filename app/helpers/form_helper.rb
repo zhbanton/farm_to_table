@@ -47,13 +47,13 @@ module FormHelper
   def setup_role(role)
     if role.class.name == 'Farm'
       Date::DAYNAMES.each do |day|
-        unless role.business_hours.map(&:day).include? day
-          role.business_hours.build(day: day)
+        unless role.business_days.map(&:day).include? day
+          role.business_days.build(day: day)
         end
       end
-      # return business_hours sorted by day of week
-      ordered_days = role.business_hours.sort_by { |bh| Date.parse(bh.day) }
-      @business_hours = ordered_days.push(ordered_days.shift)
+      # return business_days sorted by day of week
+      ordered_days = role.business_days.sort_by { |bh| Date.parse(bh.day) }
+      @business_days = ordered_days.push(ordered_days.shift)
     end
     role
   end
