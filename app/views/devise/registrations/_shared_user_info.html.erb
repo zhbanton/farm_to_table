@@ -19,7 +19,7 @@
 </div>
 
 <div>
-  <%= fields_for setup_rolable(resource.rolable) do |rf| %>
+  <%= fields_for setup_role(resource.role) do |rf| %>
     <% render "#{user_type}_fields", f: rf %>
   <% end %>
 </div>

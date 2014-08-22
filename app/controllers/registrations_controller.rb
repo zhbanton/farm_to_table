@@ -5,13 +5,13 @@ class RegistrationsController < Devise::RegistrationsController
 
     child_class = params[:user][:user_type].camelize.constantize
     if params[:user][:user_type] == 'farm'
-      resource.rolable = child_class.new(farm_params)
+      resource.role = child_class.new(farm_params)
     elsif params[:user][:user_type] == 'organization'
-      resource.rolable = child_class.new(organization_params)
+      resource.role = child_class.new(organization_params)
     end
 
     valid = resource.valid?
-    valid = resource.rolable.valid? && valid
+    valid = resource.role.valid? && valid
 
     yield resource if block_given?
     if valid && resource.save
@@ -38,15 +38,15 @@ class RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
-    child_class = resource.rolable.class.name.downcase
+    child_class = resource.role.class.name.downcase
     if child_class == 'farm'
-      resource.rolable.update(farm_params)
+      resource.role.update(farm_params)
     elsif child_class == 'organization'
-      resource.rolable.update(organization_params)
+      resource.role.update(organization_params)
     end
 
     valid = resource.valid?
-    valid = resource.rolable.valid? && valid
+    valid = resource.role.valid? && valid
 
     yield resource if block_given?
     if valid && update_resource(resource, account_update_params)
@@ -74,7 +74,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:email, :username, :password, :password_confirmation, :current_password, :name, :description, :website, :phone_number, :rolable_type, :rolable_id)
+    params.require(:user).permit(:email, :username, :password, :password_confirmation, :current_password, :name, :description, :website, :phone_number, :role_type, :role_id)
   end
 
   def farm_params

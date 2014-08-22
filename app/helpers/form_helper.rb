@@ -1,4 +1,6 @@
 module FormHelper
+
+  # available hours for farm to be open for pickup
   def available_hours
   [
     "",
@@ -41,17 +43,19 @@ module FormHelper
     "11:00pm"]
   end
 
-  def setup_rolable(rolable)
-    if rolable.class.name == 'Farm'
+  # create available business_hours for farm if they do not already exist
+  def setup_role(role)
+    if role.class.name == 'Farm'
       Date::DAYNAMES.each do |day|
-        unless rolable.business_hours.map(&:day).include? day
-          rolable.business_hours.build(day: day)
+        unless role.business_hours.map(&:day).include? day
+          role.business_hours.build(day: day)
         end
       end
-      ordered_days = rolable.business_hours.sort_by { |bh| Date.parse(bh.day) }
+      # return business_hours sorted by day of week
+      ordered_days = role.business_hours.sort_by { |bh| Date.parse(bh.day) }
       @business_hours = ordered_days.push(ordered_days.shift)
     end
-    rolable
+    role
   end
 
 end

@@ -19,8 +19,8 @@
 #  description            :text
 #  website                :string(255)
 #  phone_number           :string(255)
-#  rolable_id             :integer
-#  rolable_type           :string(255)
+#  role_id             :integer
+#  role_type           :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  belongs_to :rolable, polymorphic: true, dependent: :destroy
+  belongs_to :role, polymorphic: true, dependent: :destroy
 
   validates :name, presence: true
 

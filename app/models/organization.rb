@@ -12,6 +12,6 @@ class Organization < ActiveRecord::Base
 
   BUSINESS_TYPES = ['restaurant', 'caterer', 'educational', 'business', 'charitable', 'other']
 
-  has_one :user, as: :rolable
+  has_one :user, as: :role
 
 end
