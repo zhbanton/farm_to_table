@@ -18,6 +18,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to farm_products_path(@farm), notice: "#{@product.name} created"
     else
+      flash.now[:alert] = @product.errors.full_messages.join(', ')
       render :new
     end
   end
@@ -26,6 +27,7 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to farm_products_path(@farm), notice: "#{@product.name} updated"
     else
+      flash.now[:alert] = @product.errors.full_messages.join(', ')
       render :edit
     end
   end
@@ -39,7 +41,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :variety, :description, :organic, :non_gmo, :no_spray, :low_spray)
+    params.require(:product).permit(:name, :variety, :description, :organic, :default_price, :non_gmo, :no_spray, :low_spray)
   end
 
   def set_farm

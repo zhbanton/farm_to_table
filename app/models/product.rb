@@ -16,7 +16,10 @@
 #
 
 class Product < ActiveRecord::Base
+
   belongs_to :farm
+  has_many :postings, dependent: :destroy
 
   validates :name, presence: true
+
 end

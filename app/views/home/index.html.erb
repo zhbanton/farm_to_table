@@ -1,14 +1,1 @@
-<% if user_signed_in? %>
-  <% if current_user.role_type == 'Farm' %>
-    <%= link_to 'create new product', new_farm_product_path(current_user.role) %><br>
-    <%= link_to 'view products', farm_products_path(current_user.role) %><br>
-  <% else %>
-  <% end %>
-  signed in as <%= current_user.email %><br>
-  <%= link_to 'edit account', edit_user_registration_path %><br>
-  <%= link_to 'logout', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'sign in', new_user_session_path %><br>
-  <%= link_to 'sign up as a farm', farm_sign_up_path %><br>
-  <%= link_to 'sign up as an organization', organization_sign_up_path %>
-<% end %>
+
