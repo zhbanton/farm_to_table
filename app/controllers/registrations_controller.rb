@@ -38,7 +38,7 @@ class RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
-    child_class = resource.role.class.name.downcase
+    child_class = resource.role_type.downcase
     if child_class == 'farm'
       resource.role.update(farm_params)
     elsif child_class == 'organization'
