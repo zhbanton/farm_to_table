@@ -7,6 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if user_signed_in? %>
+  <% if current_user.role_type == 'Farm' %>
+    <%= link_to 'create new product', new_farm_product_path(current_user.role) %> |
+    <%= link_to 'view products', farm_products_path(current_user.role) %> |
+  <% else %>
+  <% end %>
+  signed in as <%= current_user.email %> |
+  <%= link_to 'edit account', edit_user_registration_path %> |
+  <%= link_to 'logout', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'sign in', new_user_session_path %> |
+  <%= link_to 'sign up as a farm', farm_sign_up_path %> |
+  <%= link_to 'sign up as an organization', organization_sign_up_path %>
+<% end %>
 
 <% flash.each do |name, msg| %>
   <% if msg.is_a?(String) %>

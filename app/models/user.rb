@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
 
   belongs_to :role, polymorphic: true, dependent: :destroy
 
+  validates :role, presence: true
   validates :name, presence: true
 
 end
