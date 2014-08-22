@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_farm
+  before_action :set_product, only: [:edit, :update, :destroy]
 
   def index
     @products = @farm.products
@@ -21,18 +22,18 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-    @product = @farm.products.find(params[:id])
-  end
-
   def update
-    @product = @farm.products.find(params[:id])
-
     if @product.update(product_params)
       redirect_to farm_products_path(@farm), notice: "#{@product.name} updated"
     else
       render :edit
     end
+  end
+
+  def destroy
+    name = @product.name
+    @product.destroy
+    redirect_to farm_products_path(@farm), alert: "#{name} deleted"
   end
 
   private
@@ -43,6 +44,10 @@ class ProductsController < ApplicationController
 
   def set_farm
     @farm = Farm.find(params[:farm_id])
+  end
+
+  def set_product
+    @product = @farm.products.find(params[:id])
   end
 
 end
