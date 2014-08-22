@@ -3,6 +3,10 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_farm
 
+  def index
+    @products = @farm.products
+  end
+
   def new
     @product = Product.new
   end
