@@ -19,8 +19,8 @@
 #  description            :text
 #  website                :string(255)
 #  phone_number           :string(255)
-#  role_id             :integer
-#  role_type           :string(255)
+#  role_id                :integer
+#  role_type              :string(255)
 #
 
 class User < ActiveRecord::Base
