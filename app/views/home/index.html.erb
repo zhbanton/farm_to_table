@@ -1,6 +1,7 @@
 <% if user_signed_in? %>
   <% if current_user.role_type == 'Farm' %>
     <%= link_to 'create new product', new_farm_product_path(current_user.role) %><br>
+    <%= link_to 'view products', farm_products_path(current_user.role) %><br>
   <% else %>
   <% end %>
   signed in as <%= current_user.email %><br>

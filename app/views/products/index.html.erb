@@ -2,5 +2,7 @@
 <ul>
   <% @products.each do |product| %>
     <%= product.name %>
+    <%= link_to 'edit', edit_farm_product_path(@farm, product) %>
+    <%= link_to 'delete', farm_product_path(@farm, product), method: :delete, data: {confirm: "Are you sure you want to delete #{product.name?}"} %>
   <% end %>
 </ul>

@@ -21,6 +21,20 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+    @product = @farm.products.find(params[:id])
+  end
+
+  def update
+    @product = @farm.products.find(params[:id])
+
+    if @product.update(product_params)
+      redirect_to farm_products_path(@farm), notice: "#{@product.name} updated"
+    else
+      render :edit
+    end
+  end
+
   private
 
   def product_params

@@ -1,0 +1,24 @@
+<%= form_for [@farm, @product] do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :variety %><br>
+  <%= f.text_field :variety %>
+  <br>
+  <%= f.label :description %><br>
+  <%= f.text_area :description %>
+  <br>
+  <%= f.label :organic %>
+  <%= f.check_box :organic %>
+
+  <%= f.label :non_gmo, 'non-gmo' %>
+  <%= f.check_box :non_gmo %>
+
+  <%= f.label :no_spray, 'no-spray' %>
+  <%= f.check_box :no_spray %>
+
+  <%= f.label :low_spray, 'low-spray' %>
+  <%= f.check_box :low_spray %><br>
+
+  <%= f.submit %>
+<% end %>
