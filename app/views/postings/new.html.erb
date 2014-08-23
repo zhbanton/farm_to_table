@@ -1,5 +1,7 @@
 <h3> New Posting For <%= name_and_variety_to_s(@product.name, @product.variety) %></h3>
 
+<p><%= @product.description %></p>
+
 <% if @product.active_postings.present? %>
   <table>
     <thead>
@@ -22,7 +24,7 @@
     </tr>
     <% end %>
     </tbody>
-  <table>
+  </table>
 <% else %>
   <p>No active postings</p>
 <% end %>

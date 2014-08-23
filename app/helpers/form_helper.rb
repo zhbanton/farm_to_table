@@ -1,6 +1,6 @@
 module FormHelper
 
-  include ActionView::Helpers::NumberHelper
+ActionView::Helpers::NumberHelper
 
   # available hours for farm to be open for pickup
   def available_hours

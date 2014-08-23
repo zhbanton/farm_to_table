@@ -1,5 +1,5 @@
 <h2>Sign up</h2>
-
+<div class="signup">
 <%
   if params.has_key?(:user) && params[:user].has_key?(:user_type) && User::USER_TYPES.include?(params[:user][:user_type].downcase)
     user_type = params[:user][:user_type].downcase
@@ -36,3 +36,4 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+</div>

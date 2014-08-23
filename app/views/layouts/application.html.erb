@@ -11,7 +11,7 @@
   <% if current_user.role_type == 'Farm' %>
     <%= link_to 'create new product', new_farm_product_path(current_user.role) %> |
     <%= link_to 'view products', farm_products_path(current_user.role) %> |
-    <%= link_to 'view_postings', farm_postings_path(current_user.role) %> |
+    <%= link_to 'view postings', farm_postings_path(current_user.role) %> |
   <% else %>
   <% end %>
   signed in as <%= current_user.email %> |
