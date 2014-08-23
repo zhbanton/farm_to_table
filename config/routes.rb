@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :products
   end
 
+  resources :products, only: [] do
+    resources :postings
+  end
+
   root to: 'home#index'
 
 end
