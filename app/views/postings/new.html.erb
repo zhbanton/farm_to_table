@@ -1,6 +1,6 @@
 <h3> New Posting For <%= @product.name %></h3>
 
-<%= form_for [@product, @posting] do |f| %>
+<%= form_for [@product, set_posting_default_price_and_unit(@posting)] do |f| %>
   <%= f.label :quantity%><br>
   <%= f.text_field :quantity%>
   <br>
@@ -13,8 +13,8 @@
   <%= f.label :starting_date %>
   <%= f.date_field :starting_date, value: Date.today, min: Date.today %>
   <br>
-  <%= f.label :ending_date %>
-  <%= f.date_field :ending_date, min: Date.today %>
+  <%= f.label :expiration_date %>
+  <%= f.date_field :expiration_date, min: Date.today %>
   <br>
   <%= f.submit %>
 <% end %>

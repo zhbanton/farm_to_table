@@ -22,4 +22,24 @@ module FormHelper
     role
   end
 
+  def set_posting_default_price_and_unit(posting)
+    posting.unit = posting.product.default_unit.present? ? posting.product.default_unit : last_associated_posting_unit(posting)
+    posting.price_per_unit = posting.product.default_price.present? ? posting.product.default_price : last_associated_posting_price(posting)
+    posting
+  end
+
+  private
+
+  def last_associated_posting_unit(posting)
+    posting.product.postings.length > 1 ? last_associated_posting(posting).unit : ''
+  end
+
+  def last_associated_posting_price(posting)
+    posting.product.postings.length > 1 ? last_associated_posting(posting).price_per_unit : ''
+  end
+
+  def last_associated_posting(posting)
+    posting.product.postings.order(:created_at).last
+  end
+
 end

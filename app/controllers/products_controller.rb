@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :destroy]
 
   def index
-    @products = @farm.products
+    @products = @farm.products.order(:name)
   end
 
   def new
@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :variety, :description, :organic, :default_price, :non_gmo, :no_spray, :low_spray)
+    params.require(:product).permit(:name, :variety, :description, :organic, :default_price, :default_unit, :non_gmo, :no_spray, :low_spray)
   end
 
   def set_farm

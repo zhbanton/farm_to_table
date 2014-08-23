@@ -2,14 +2,14 @@ class PostingsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_product
-  before_action :set_posting, only: [:edit, :update, :destroy]
+  # before_action :set_posting, only: [:edit, :update, :destroy]
 
   def index
-    @postings = @product.postings
+    @postings = @product.active_postings.order(:starting_date)
   end
 
   def new
-    @posting = Posting.new
+    @posting = @product.postings.new
   end
 
   def create
@@ -23,25 +23,25 @@ class PostingsController < ApplicationController
     end
   end
 
-  def update
-    if @posting.update(posting_params)
-      redirect_to product_postings_path(@product), notice: "posting for #{@product.name} updated"
-    else
-      flash.now[:alert] = @posting.errors.full_messages.join(', ')
-      render :edit
-    end
-  end
+  # def update
+  #   if @posting.update(posting_params)
+  #     redirect_to product_postings_path(@product), notice: "posting for #{@product.name} updated"
+  #   else
+  #     flash.now[:alert] = @posting.errors.full_messages.join(', ')
+  #     render :edit
+  #   end
+  # end
 
-  def destroy
-    name = @posting.name
-    @posting.destroy
-    redirect_to product_postings_path(@product), alert: "#{name} deleted"
-  end
+  # def destroy
+  #   name = @product.name
+  #   @posting.destroy
+  #   redirect_to product_postings_path(@product), alert: "#{name} deleted"
+  # end
 
   private
 
   def posting_params
-    params.require(:posting).permit(:quantity, :unit, :price_per_unit, :starting_date, :ending_date)
+    params.require(:posting).permit(:quantity, :unit, :price_per_unit, :starting_date, :expiration_date)
   end
 
   def set_product

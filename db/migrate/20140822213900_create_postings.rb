@@ -5,7 +5,7 @@ class CreatePostings < ActiveRecord::Migration
       t.string :unit
       t.decimal :price_per_unit
       t.date :starting_date
-      t.date :ending_date
+      t.date :expiration_date
       t.references :product, index: true
 
       t.timestamps

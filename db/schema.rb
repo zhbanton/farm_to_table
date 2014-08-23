@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822213900) do
+ActiveRecord::Schema.define(version: 20140823020358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140822213900) do
     t.string   "unit"
     t.decimal  "price_per_unit"
     t.date     "starting_date"
-    t.date     "ending_date"
+    t.date     "expiration_date"
     t.integer  "product_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20140822213900) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "default_price"
+    t.string   "default_unit"
   end
 
   add_index "products", ["farm_id"], name: "index_products_on_farm_id", using: :btree

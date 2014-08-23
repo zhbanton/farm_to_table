@@ -23,4 +23,8 @@ class Product < ActiveRecord::Base
 
   validates :name, presence: true
 
+  def active_postings
+    postings.where('expiration_date > ?', Date.today)
+  end
+
 end
