@@ -18,4 +18,8 @@ class Farm < ActiveRecord::Base
 
   validates :minimum_order, numericality: true
 
+  def active_postings
+    postings.where('expiration_date >= ?', Date.today)
+  end
+
 end

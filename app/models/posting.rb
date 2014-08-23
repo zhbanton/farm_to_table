@@ -20,5 +20,21 @@ class Posting < ActiveRecord::Base
 
   validates :quantity, :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
 
+  def total_value
+    price_per_unit * quantity
+  end
+
+  def last_associated_posting_unit
+    product.postings.length > 1 ? last_associated_posting.unit : nil
+  end
+
+  def last_associated_posting_price
+    product.postings.length > 1 ? last_associated_posting.price_per_unit : nil
+  end
+
+  def last_associated_posting
+    product.postings.order(:created_at).last
+  end
+
 end
 

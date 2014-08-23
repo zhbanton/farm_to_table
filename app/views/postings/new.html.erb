@@ -1,4 +1,31 @@
-<h3> New Posting For <%= @product.name %></h3>
+<h3> New Posting For <%= name_and_variety_to_s(@product.name, @product.variety) %></h3>
+
+<% if @product.active_postings.present? %>
+  <table>
+    <thead>
+      <th>starting quantity</th>
+      <th>quantity remaining</th>
+      <th>price per unit</th>
+      <th>post date</th>
+      <th>expiration date</th>
+      <th>total value</th>
+    </thead>
+    <tbody>
+    <% @product.active_postings.each do |posting| %>
+    <tr>
+      <td><%= quantity_to_s(posting.quantity, posting.unit) %></td>
+      <td></td>
+      <td><%= number_to_currency(posting.price_per_unit) %></td>
+      <td><%= posting.starting_date %></td>
+      <td><%= posting.expiration_date %></td>
+      <td><%= number_to_currency(posting.total_value) %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  <table>
+<% else %>
+  <p>No active postings</p>
+<% end %>
 
 <%= form_for [@product, set_posting_default_price_and_unit(@posting)] do |f| %>
   <%= f.label :quantity%><br>

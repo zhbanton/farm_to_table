@@ -19,12 +19,12 @@
 class Product < ActiveRecord::Base
 
   belongs_to :farm
-  has_many :postings, dependent: :destroy
+  has_many :postings
 
   validates :name, presence: true
 
   def active_postings
-    postings.where('expiration_date > ?', Date.today)
+    postings.where('expiration_date >= ?', Date.today)
   end
 
 end

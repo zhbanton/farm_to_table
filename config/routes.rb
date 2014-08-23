@@ -7,10 +7,11 @@ Rails.application.routes.draw do
 
   resources :farms, only: [] do
     resources :products
+    resources :postings, only: [:index]
   end
 
   resources :products, only: [] do
-    resources :postings
+    resources :postings, only: [:new, :create, :edit, :update, :destroy]
   end
 
   root to: 'home#index'

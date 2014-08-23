@@ -1,11 +1,11 @@
 class PostingsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_product
+  before_action :set_product, only: [:new, :create]
   # before_action :set_posting, only: [:edit, :update, :destroy]
 
   def index
-    @postings = @product.active_postings.order(:starting_date)
+    @postings = current_user.role.active_postings.order(:starting_date)
   end
 
   def new
@@ -16,7 +16,7 @@ class PostingsController < ApplicationController
     @posting = @product.postings.new(posting_params)
 
     if @posting.save
-      redirect_to product_postings_path(@product), notice: "posting for #{@product.name} created"
+      redirect_to farm_postings_path(current_user), notice: "posting for #{@product.name} created"
     else
       flash.now[:alert] = @posting.errors.full_messages.join(', ')
       render :new

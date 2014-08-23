@@ -1,5 +1,7 @@
 module FormHelper
 
+  include ActionView::Helpers::NumberHelper
+
   # available hours for farm to be open for pickup
   def available_hours
     hours = (4..11).map { |t| "#{t}:00am"}.push("12:00pm") + (1..10).map { |t| "#{t}:00pm"}
@@ -23,23 +25,17 @@ module FormHelper
   end
 
   def set_posting_default_price_and_unit(posting)
-    posting.unit = posting.product.default_unit.present? ? posting.product.default_unit : last_associated_posting_unit(posting)
-    posting.price_per_unit = posting.product.default_price.present? ? posting.product.default_price : last_associated_posting_price(posting)
+    posting.unit = posting.product.default_unit.present? ? posting.product.default_unit : posting.last_associated_posting_unit
+    posting.price_per_unit = posting.product.default_price.present? ? posting.product.default_price : posting.last_associated_posting_price
     posting
   end
 
-  private
-
-  def last_associated_posting_unit(posting)
-    posting.product.postings.length > 1 ? last_associated_posting(posting).unit : ''
+  def quantity_to_s(quantity, unit)
+    "#{quantity} #{unit.pluralize}"
   end
 
-  def last_associated_posting_price(posting)
-    posting.product.postings.length > 1 ? last_associated_posting(posting).price_per_unit : ''
-  end
-
-  def last_associated_posting(posting)
-    posting.product.postings.order(:created_at).last
+  def name_and_variety_to_s(name, variety)
+    "#{name} (#{variety})"
   end
 
 end
