@@ -2,14 +2,20 @@
   <% @farms.each do |farm| %>
     <% if farm.active_postings_by_date.present? %>
       <h4><%= farm.user.name.capitalize %></h4>
+      <table>
       <% farm.active_postings_by_name.each do |posting| %>
-        <%= name_and_variety_to_s(posting.product) %> |
-        <input type="text" class="quantity"> |
-        quantity remaining: <%= quantity_to_s(posting) %> |
-        <%= quantity_per_unit(posting) %> |
-        buy!
-        <br>
+        <div class='listing' data-posting=<%= posting.id %>>
+          <tr>
+            <td><%= name_and_variety_to_s(posting.product) %></td>
+            <td>quantity remaining: <%= quantity_to_s(posting) %></td>
+            <td><%= quantity_per_unit(posting) %></td>
+            <td><input type="text" class="quantity"></td>
+            <td><%= available_pickup_days_select(posting) %></td>
+            <td><button type='button' class='btn btn-success'>Add</button></td>
+          </tr>
+        </div>
       <% end %>
+      </table>
       <br>
     <% end %>
   <% end %>

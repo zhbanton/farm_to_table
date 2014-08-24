@@ -51,4 +51,8 @@ ActionView::Helpers::NumberHelper
     qualifications.split.join(', ')
   end
 
+  def available_pickup_days_select(posting)
+    select_tag 'pickup_day', options_for_select(posting.available_pickup_days.collect { |d| [d, d] }), prompt: 'select pickup day...'
+  end
+
 end
