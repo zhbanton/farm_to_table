@@ -34,6 +34,10 @@ ActionView::Helpers::NumberHelper
     "#{posting.quantity} #{posting.unit.pluralize}"
   end
 
+  def quantity_per_unit(posting)
+    "#{number_to_currency(posting.price_per_unit)}/#{posting.unit.singularize}"
+  end
+
   def name_and_variety_to_s(product)
     "#{product.name.capitalize} (#{product.variety})"
   end

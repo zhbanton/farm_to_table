@@ -1,1 +1,18 @@
-
+<% if user_signed_in? %>
+  <% @farms.each do |farm| %>
+    <% if farm.active_postings_by_date.present? %>
+      <h4><%= farm.user.name.capitalize %></h4>
+      <% farm.active_postings_by_name.each do |posting| %>
+        <%= name_and_variety_to_s(posting.product) %> |
+        <input type="text" class="quantity"> |
+        quantity remaining: <%= quantity_to_s(posting) %> |
+        <%= quantity_per_unit(posting) %> |
+        buy!
+        <br>
+      <% end %>
+      <br>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>Welcome to FarmToTable</p>
+<% end %>

@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
 
-def index
-end
+  def index
+    @farms = Farm.all
+  end
 
 end
+
+
+
