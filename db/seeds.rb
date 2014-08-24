@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+20.times do
+  FactoryGirl.create(:user)
+end
+
+Farm.all.each do |farm|
+  farm.products = FactoryGirl.create_list(:product, rand(12))
+end
+
+Product.all.each do |product|
+  product.postings = FactoryGirl.create_list(:posting, rand(6))
+end

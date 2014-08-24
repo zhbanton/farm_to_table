@@ -17,10 +17,10 @@
 
 FactoryGirl.define do
   factory :posting do
-    quantity "9.99"
-    unit "MyString"
-    price_per_unit "9.99"
-    starting_date "2014-08-22"
-    ending_date "2014-08-22"
+    quantity { rand(100) + 10 }
+    unit { %w(lbs pounds flats quarts pints bushels).sample }
+    price_per_unit { rand(1.0..40.0) }
+    starting_date { ((Date.today - 4.weeks)..(Date.today + 2.weeks)).to_a.sample }
+    expiration_date { starting_date + rand(15).days }
   end
 end
