@@ -1,20 +1,5 @@
-<h3><%= name_and_variety_to_s(@product) %></h3>
-<p><%= simple_format(@product.description) %></p>
-<%= qualifications_to_s(@product) %>
+<%= render 'shared/product_heading', product: @product %>
 
-<h3>Active Postings</h3>
-<% if @product.active_postings.present? %>
-  <%= render 'shared/postings_list', postings: @product.active_postings %>
-  <p><%= link_to 'Add new posting', new_product_posting_path(@product) %></p>
-<% else %>
-  <p>There are no active postings for this product. Click <%= link_to 'here', new_product_posting_path(@product) %> to add one!</p>
-<% end %>
-
-<h3>Past Postings</h3>
-<% if @product.inactive_postings.present? %>
-  <%= render 'shared/postings_list', postings: @product.inactive_postings %>
-<% else %>
-  <p>There are no past postings for this product.</p>
-<% end %>
+<%= render 'shared/active_and_inactive_postings_list', product: @product %>
 
 <%= link_to 'back', farm_products_path(@product.farm) %>
