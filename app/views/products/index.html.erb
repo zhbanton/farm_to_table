@@ -1,7 +1,7 @@
 <h3>Products</h3>
 <ul>
   <% @products.each do |product| %>
-    <%= "#{product.name} (#{product.variety})"%> |
+    <%= link_to name_and_variety_to_s(product), farm_product_path(@farm, product) %> |
     <%= link_to 'edit', edit_farm_product_path(@farm, product) %> |
     <%= link_to 'delete', farm_product_path(@farm, product), method: :delete, data: {confirm: "Are you sure you want to delete #{product.name}?"} %> |
     <%= link_to 'create new posting', new_product_posting_path(product) %>

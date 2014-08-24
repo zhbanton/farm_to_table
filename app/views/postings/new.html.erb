@@ -1,32 +1,20 @@
-<h3> New Posting For <%= name_and_variety_to_s(@product.name, @product.variety) %></h3>
+<h3><%= name_and_variety_to_s(@product) %></h3>
+<p><%= simple_format(@product.description) %></p>
+<%= qualifications_to_s(@product) %>
 
-<p><%= @product.description %></p>
-
+<h3>Active Postings</h3>
 <% if @product.active_postings.present? %>
-  <table>
-    <thead>
-      <th>starting quantity</th>
-      <th>quantity remaining</th>
-      <th>price per unit</th>
-      <th>post date</th>
-      <th>expiration date</th>
-      <th>total value</th>
-    </thead>
-    <tbody>
-    <% @product.active_postings.each do |posting| %>
-    <tr>
-      <td><%= quantity_to_s(posting.quantity, posting.unit) %></td>
-      <td></td>
-      <td><%= number_to_currency(posting.price_per_unit) %></td>
-      <td><%= posting.starting_date %></td>
-      <td><%= posting.expiration_date %></td>
-      <td><%= number_to_currency(posting.total_value) %></td>
-    </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <%= render 'shared/postings_list', postings: @product.active_postings %>
+  <p><%= link_to 'Add new posting', farm_product_path(@product.farm, @product) %></p>
 <% else %>
-  <p>No active postings</p>
+  <p>There are no active postings for this product. Click <%= link_to 'here', farm_product_path(@product.farm, @product) %> to add one!</p>
+<% end %>
+
+<h3>Past Postings</h3>
+<% if @product.inactive_postings.present? %>
+  <%= render 'shared/postings_list', postings: @product.inactive_postings %>
+<% else %>
+  <p>There are no past postings for this product.</p>
 <% end %>
 
 <%= form_for [@product, set_posting_default_price_and_unit(@posting)] do |f| %>
@@ -48,3 +36,4 @@
   <%= f.submit %>
 <% end %>
 
+<%= link_to 'back', farm_products_path(@product.farm) %>

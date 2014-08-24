@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <th>product</th>
+    <th>starting quantity</th>
+    <th>quantity remaining</th>
+    <th>price per unit</th>
+    <th>post date</th>
+    <th>expiration date</th>
+    <th>total value</th>
+  </thead>
+  <tbody>
+    <% postings.each do |posting| %>
+    <tr>
+      <td><%= link_to name_and_variety_to_s(posting.product), farm_product_path(posting.farm, posting.product) %></td>
+      <td><%= quantity_to_s(posting) %></td>
+      <td></td>
+      <td><%= number_to_currency(posting.price_per_unit) %></td>
+      <td><%= posting.starting_date %></td>
+      <td><%= posting.expiration_date %></td>
+      <td><%= number_to_currency(posting.total_value) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

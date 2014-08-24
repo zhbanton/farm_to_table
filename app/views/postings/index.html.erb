@@ -1,25 +1,13 @@
 <h3>Active Postings</h3>
+<% if @farm.active_postings.present? %>
+  <%= render 'shared/postings_list', postings: @farm.active_postings %>
+<% else %>
+  <p>You don't have any active postings.</p>
+<% end %>
 
-<table>
-  <thead>
-    <th>product</th>
-    <th>starting quantity</th>
-    <th>quantity remaining</th>
-    <th>price per unit</th>
-    <th>post date</th>
-    <th>expiration date</th>
-    <th>total value</th>
-  </thead>
-  <tbody>
-  <% @postings.each do |posting| %>
-  <tr>
-    <td><%= name_and_variety_to_s(posting.product.name, posting.product.variety) %></td>
-    <td><%= quantity_to_s(posting.quantity, posting.unit) %></td>
-    <td></td>
-    <td><%= number_to_currency(posting.price_per_unit) %></td>
-    <td><%= posting.starting_date %></td>
-    <td><%= posting.expiration_date %></td>
-    <td><%= number_to_currency(posting.total_value) %></td>
-  </tr>
-  </tbody>
+<h3>Past Postings</h3>
+<% if @farm.inactive_postings.present? %>
+  <%= render 'shared/postings_list', postings: @farm.inactive_postings %>
+<% else %>
+  <p>You don't have any past postings.</p>
 <% end %>

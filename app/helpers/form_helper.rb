@@ -30,12 +30,21 @@ ActionView::Helpers::NumberHelper
     posting
   end
 
-  def quantity_to_s(quantity, unit)
-    "#{quantity} #{unit.pluralize}"
+  def quantity_to_s(posting)
+    "#{posting.quantity} #{posting.unit.pluralize}"
   end
 
-  def name_and_variety_to_s(name, variety)
-    "#{name} (#{variety})"
+  def name_and_variety_to_s(product)
+    "#{product.name.capitalize} (#{product.variety})"
+  end
+
+  def qualifications_to_s(product)
+    qualifications = []
+    qualifications << 'organic' if product.organic?
+    qualifications << 'non-gmo' if product.non_gmo?
+    qualifications << 'no-spray' if product.no_spray?
+    qualifications << 'low-spray' if product.low_spray?
+    qualifications.split.join(', ')
   end
 
 end

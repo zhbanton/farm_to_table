@@ -8,6 +8,10 @@ class ProductsController < ApplicationController
     @products = @farm.products.order(:name)
   end
 
+  def show
+    @product = Product.find(params[:id])
+  end
+
   def new
     @product = Product.new
   end

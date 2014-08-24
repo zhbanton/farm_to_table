@@ -5,7 +5,7 @@ class PostingsController < ApplicationController
   # before_action :set_posting, only: [:edit, :update, :destroy]
 
   def index
-    @postings = current_user.role.active_postings.order(:starting_date)
+    @farm = current_user.role
   end
 
   def new
