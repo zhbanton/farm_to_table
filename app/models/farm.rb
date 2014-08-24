@@ -23,7 +23,7 @@ class Farm < ActiveRecord::Base
   end
 
   def active_postings_by_name
-    postings.includes(:product).where('postings.expiration_date >= ?', Date.today).order('products.name')
+    postings.includes(:product).where('postings.expiration_date >= ?', Date.today).order('products.name', :starting_date)
   end
 
   def inactive_postings
