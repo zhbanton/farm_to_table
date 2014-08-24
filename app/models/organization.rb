@@ -13,5 +13,6 @@ class Organization < ActiveRecord::Base
   BUSINESS_TYPES = ['restaurant', 'caterer', 'educational', 'business', 'charitable', 'other']
 
   has_one :user, as: :role, dependent: :destroy
+  has_many :orders, depdent: :destroy
 
 end
