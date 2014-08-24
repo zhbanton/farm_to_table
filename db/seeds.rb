@@ -11,9 +11,9 @@
 end
 
 Farm.all.each do |farm|
-  FactoryGirl.create_list(:product, rand(12))
+  farm.products = FactoryGirl.create_list(:product, rand(12))
 end
 
 Product.all.each do |product|
-  FactoryGirl.create_list(:posting, rand(6))
+  product.postings = FactoryGirl.create_list(:posting, rand(6))
 end
