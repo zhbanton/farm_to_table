@@ -14,6 +14,7 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  default_price :decimal(, )
+#  default_unit  :string(255)
 #
 
 require 'rails_helper'

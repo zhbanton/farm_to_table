@@ -14,19 +14,19 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  default_price :decimal(, )
+#  default_unit  :string(255)
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
   factory :product do
-    name "MyString"
-    variety "MyString"
-    description "MyText"
-    organic false
-    non_gmo false
-    no_spray false
-    low_spray false
-    farm nil
+    name { %w( Strawberries Blueberries Potatoes Kale Lettuce Chard Tomatoes Corn Eggs Peaches Scallions Onions Garlic Zucchini Squash Cheese Pork Chicken Beef Cilantro Basil Sage Oregano Thyme Nectarines Plums Watermelon Yams Broccoli Okra Cat).sample }
+    variety { %w(great ok).sample }
+    description { Faker::Lorem.sentence }
+    organic { [true, false].sample }
+    non_gmo { [true, false].sample }
+    no_spray { [true, false].sample }
+    low_spray { [true, false].sample }
   end
 end
