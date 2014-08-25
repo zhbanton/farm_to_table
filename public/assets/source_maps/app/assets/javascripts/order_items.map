@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "",
+  "sourceRoot": "",
+  "sources": [
+    "/assets/source_maps/app/assets/javascripts/order_items.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;AAAA,EAAA,IAAC,CAAA,UAAD,GAAc,SAAC,KAAD,GAAA;WACZ,OAAO,CAAC,GAAR,CAAY,SAAZ,EADY;EAAA,CAAd,CAAA;AAAA"
+}
