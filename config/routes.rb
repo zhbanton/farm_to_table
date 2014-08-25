@@ -14,9 +14,13 @@ Rails.application.routes.draw do
     resources :postings, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  resources :postings, only: [:show]
+
   resources :organizations, only: [] do
     resources :orders, only: [:index, :show, :new, :create]
   end
+
+  resources :order_items, only: :create
 
   root to: 'home#index'
 

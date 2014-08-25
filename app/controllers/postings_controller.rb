@@ -2,10 +2,15 @@ class PostingsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_product, only: [:new, :create]
-  # before_action :set_posting, only: [:edit, :update, :destroy]
+  before_action :set_posting, only: :show # [:edit, :update, :destroy]
+  respond_to :json
 
   def index
     @farm = current_user.role
+  end
+
+  def show
+    respond_with @posting
   end
 
   def new
@@ -49,7 +54,7 @@ class PostingsController < ApplicationController
   end
 
   def set_posting
-    @posting = @product.postings.find(params[:id])
+    @posting = Posting.find(params[:id])
   end
 
 end

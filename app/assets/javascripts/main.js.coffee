@@ -1,3 +1,3 @@
 $(document).ready ->
-  $('.add-to-order').click addToOrder
+  $('.add-to-order').click getPosting
 

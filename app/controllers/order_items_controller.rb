@@ -9,7 +9,8 @@ class OrderItemsController < ApplicationController
   def create
     order_item = OrderItem.new(order_item_params)
     order_item.order = @order
-    respond_with order_item
+    order_item.save
+    render json: order_item
   end
 
   private
