@@ -1,5 +1,5 @@
 @getPosting = (event) ->
-  $(this).find('button').prop('disabled', true)
+  $(this).prop('disabled', true)
   $.ajax
     url: Routes.posting_path($(this).parents('.listing').data('posting')),
     type: 'GET'
@@ -19,6 +19,15 @@
     data: _data,
     dataType: 'json'
   .done $.proxy(addEditAndDelete, $(this).parent())
+  .fail $.proxy((jqXHR) ->
+    if jqXHR.status is 422
+      validationFailure jqXHR.responseJSON.errors, $(this)
+    else
+      genericFailure jqXHR
+  , this)
+  .always $.proxy( ->
+    $(this).prop('disabled', false);
+  , this)
   event.preventDefault
 
 @addEditAndDelete = (data) ->
@@ -26,4 +35,26 @@
   $(this).append $('<button>').text('Update').addClass('update-order btn btn-primary')
   $(this).append $('<button>').text('Delete').addClass('delete-from-order btn btn-danger')
   event.preventDefault
+
+@validationFailure = (errors, $form) ->
+  errorString = $.map(errors, (messages, attribute) ->
+    messages.map((message) ->
+      attribute + " " + message
+    ).join ", "
+  ).join(", ")
+  $form.tooltip "destroy"
+  $form.tooltip
+    title: errorString
+    trigger: "manual"
+    placement: "right"
+
+  $form.tooltip "show"
+  setTimeout (->
+    $form.tooltip "destroy"
+    return
+  ), 2000
+  return
+
+  genericFailure = (jqXHR) ->
+    alert "Error " + jqXHR.status + " occurred. Try refreshing maybe?"
 
