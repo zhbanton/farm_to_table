@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :postings, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  resources :orders, only: :show
+
   root to: 'home#index'
 
 end
