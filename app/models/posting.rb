@@ -16,6 +16,7 @@
 class Posting < ActiveRecord::Base
 
   belongs_to :product
+  has_many :order_items, dependent: :destroy
 
   validates :quantity, :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
 

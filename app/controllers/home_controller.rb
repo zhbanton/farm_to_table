@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    @farms = Farm.all.includes(:business_days, :products, :postings)
+    @farms = Farm.all.includes(:products, :postings)
   end
 
 end
