@@ -9,9 +9,9 @@
   _postingId = data.id
   _quantity = $(this).parents('.listing').find('.quantity').val()
   _pickupDate = $(this).parents('.listing').find('#pickup_day').val()
-  _cost = _quantity * data.price_per_unit
-  _data = order_item: {posting_id: _postingId, quantity: _quantity, pickup_date: _pickupDate, cost: _cost }
-  debugger
+  _price_per_unit = data.price_per_unit
+  _unit = data.unit
+  _data = order_item: {posting_id: _postingId, quantity: _quantity, pickup_date: _pickupDate, price_per_unit: _price_per_unit, unit: _unit }
   $.ajax
     url: Routes.order_items_path(),
     type: 'POST',

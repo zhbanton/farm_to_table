@@ -1,6 +1,27 @@
 <h3>Current Order</h3>
 <% if @order.order_items.present? %>
-  you have order items
+  <table>
+    <thead>
+      <th>Item</th>
+      <th>Farm</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Pickup Date</th>
+      <th>Total Cost</th>
+    <thead>
+    <tbody>
+      <% @order.order_items.each do |item| %>
+        <tr>
+          <td><%= name_and_variety_to_s(item.posting.product) %></td>
+          <td><%= %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <p>You haven't selected any products yet</p>
 <% end %>
