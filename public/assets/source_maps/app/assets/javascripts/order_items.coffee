@@ -17,8 +17,12 @@
     type: 'POST',
     data: _data,
     dataType: 'json'
-  .done logData
+  .done $.proxy(addEditAndDelete, $(this).parent())
   event.preventDefault
 
-@logData = (data) ->
-  console.log(data)
+@addEditAndDelete = (data) ->
+  $(this).children().remove()
+  $(this).append $('<button>').text('Update').addClass('update-order btn btn-primary')
+  $(this).append $('<button>').text('Delete').addClass('delete-from-order btn btn-danger')
+  event.preventDefault
+

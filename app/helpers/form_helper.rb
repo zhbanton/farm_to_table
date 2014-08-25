@@ -30,12 +30,12 @@ ActionView::Helpers::NumberHelper
     posting
   end
 
-  def quantity_to_s(posting)
-    "#{posting.quantity} #{posting.unit.pluralize}"
+  def quantity_to_s(object)
+    "#{object.quantity} #{object.unit.pluralize}"
   end
 
-  def quantity_per_unit(posting)
-    "#{number_to_currency(posting.price_per_unit)}/#{posting.unit.singularize}"
+  def quantity_per_unit(object)
+    "#{number_to_currency(object.price_per_unit)}/#{object.unit.singularize}"
   end
 
   def name_and_variety_to_s(product)
