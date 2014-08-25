@@ -1,4 +1,7 @@
 <%= form_for [@farm, @product] do |f| %>
+
+  <%= render 'shared/errors', object: @product %>
+
   <%= f.label :name %><br>
   <%= f.text_field :name %>
   <br>

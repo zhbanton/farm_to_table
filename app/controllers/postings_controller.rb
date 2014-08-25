@@ -23,7 +23,6 @@ class PostingsController < ApplicationController
     if @posting.save
       redirect_to farm_postings_path(current_user), notice: "posting for #{@product.name} created"
     else
-      flash.now[:alert] = @posting.errors.full_messages.join(', ')
       render :new
     end
   end
@@ -32,7 +31,6 @@ class PostingsController < ApplicationController
   #   if @posting.update(posting_params)
   #     redirect_to product_postings_path(@product), notice: "posting for #{@product.name} updated"
   #   else
-  #     flash.now[:alert] = @posting.errors.full_messages.join(', ')
   #     render :edit
   #   end
   # end

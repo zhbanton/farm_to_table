@@ -22,16 +22,23 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to farm_products_path(@farm), notice: "#{@product.name} created"
     else
-      flash.now[:alert] = @product.errors.full_messages.join(', ')
       render :new
     end
+    # respond_to do |format|
+    #   if @product.save
+    #     format.html { redirect_to @product, notice: 'Line item was successfully created.' }
+    #     format.json { render action: 'show', status: :created, location: @product }
+    #   else
+    #     format.html { render action: 'new' }
+    #     format.json { render json: @product.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   def update
     if @product.update(product_params)
       redirect_to farm_products_path(@farm), notice: "#{@product.name} updated"
     else
-      flash.now[:alert] = @product.errors.full_messages.join(', ')
       render :edit
     end
   end
