@@ -1,0 +1,6 @@
+<h3>Current Order</h3>
+<% if @order.order_items.present? %>
+  you have order items
+<% else %>
+  <p>You haven't selected any products yet</p>
+<% end %>
