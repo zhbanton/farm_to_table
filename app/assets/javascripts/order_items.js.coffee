@@ -7,8 +7,8 @@
 
 @addToOrder = (data) ->
   _postingId = data.id
-  _quantity = $(this).parents('.listing').find('.quantity').val()
-  _pickupDate = $(this).parents('.listing').find('#pickup_day').val()
+  _quantity = $(this).parents('.listing').find('#order_item_quantity').val()
+  _pickupDate = $(this).parents('.listing').find('#order_item_pickup_date').val()
   _price_per_unit = data.price_per_unit
   _unit = data.unit
   _data = order_item: {posting_id: _postingId, quantity: _quantity, pickup_date: _pickupDate, price_per_unit: _price_per_unit, unit: _unit }

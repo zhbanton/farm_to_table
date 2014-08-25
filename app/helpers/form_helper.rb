@@ -24,6 +24,15 @@ ActionView::Helpers::NumberHelper
     role
   end
 
+  def setup_order_item(order, posting)
+    associated_items = order.order_items.where(posting: posting)
+    if associated_items.present?
+      return associated_items.first
+    end
+    OrderItem.new
+  end
+
+
   def set_posting_default_price_and_unit(posting)
     posting.unit = posting.product.default_unit.present? ? posting.product.default_unit : posting.last_associated_posting_unit
     posting.price_per_unit = posting.product.default_price.present? ? posting.product.default_price : posting.last_associated_posting_price
@@ -52,7 +61,7 @@ ActionView::Helpers::NumberHelper
   end
 
   def available_pickup_days_select(posting)
-    select_tag 'pickup_day', options_for_select(posting.available_pickup_days.collect { |d| [d, d] }), prompt: 'select pickup day...'
+    posting.available_pickup_days.collect { |d| [d, d] }
   end
 
 end

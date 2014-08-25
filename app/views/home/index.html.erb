@@ -4,14 +4,23 @@
       <% if farm.active_postings_by_date.present? %>
         <h4><%= farm.user.name.capitalize %></h4>
         <% farm.active_postings_by_name.each do |posting| %>
-          <div class='listing' data-posting=<%= posting.id %>>
-            <span><%= name_and_variety_to_s(posting.product) %> |</span>
-            <span>quantity remaining: <%= quantity_to_s(posting) %> |</span>
-            <span><%= quantity_per_unit(posting) %> |</span>
-            <span class='pickup-day'><%= available_pickup_days_select(posting) %></span>
-            <span><input type="text" class="quantity"> |</span>
-            <span><button type='button' class='add-to-order btn btn-success'>Add</button></span>
-          </div>
+          <%= form_for setup_order_item(@order, posting) do |f| %>
+            <div class='listing' data-posting=<%= posting.id %>>
+              <span><%= name_and_variety_to_s(posting.product) %> |</span>
+              <span>quantity remaining: <%= quantity_to_s(posting) %> |</span>
+              <span><%= quantity_per_unit(posting) %> |</span>
+              <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(posting), prompt: 'pickup day' %></span>
+              <span><%= f.text_field :quantity, class: 'quantity' %>|</span>
+              <% if f.object.persisted? %>
+                <span>
+                  <button type='button' class='update-order btn btn-primary'>Update</button>
+                  <button type='button' class='delete-from-order btn btn-danger'>Delete</button>
+                </span>
+              <% else %>
+                <span><button type='button' class='add-to-order btn btn-success'>Add</button></span>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
         <br>
       <% end %>
