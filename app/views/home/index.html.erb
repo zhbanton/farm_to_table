@@ -10,7 +10,7 @@
               <span>quantity remaining: <%= quantity_to_s(posting) %> |</span>
               <span><%= quantity_per_unit(posting) %> |</span>
               <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(posting), prompt: 'pickup day' %></span>
-              <span><%= f.text_field :quantity, class: 'quantity' %>|</span>
+              <span><%= f.text_field :quantity, type: 'number', class: 'quantity' %>|</span>
               <% if f.object.persisted? %>
                 <span>
                   <button type='button' class='update-order btn btn-primary'>Update</button>

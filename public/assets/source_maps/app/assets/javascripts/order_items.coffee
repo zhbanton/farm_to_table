@@ -1,4 +1,5 @@
 @getPosting = (event) ->
+  $(this).find('button').prop('disabled', true)
   $.ajax
     url: Routes.posting_path($(this).parents('.listing').data('posting')),
     type: 'GET'
