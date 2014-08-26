@@ -4,7 +4,7 @@ class OrderItemsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_order, only: :create
-  respond_to :html, :json
+  respond_to :json
 
   def create
     order_item = OrderItem.new(order_item_params)

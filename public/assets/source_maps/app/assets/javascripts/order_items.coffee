@@ -76,6 +76,8 @@
 
 @addAddButton = (data) ->
   $(this).parents('.listing').removeData('order-item')
+  $(this).parents('.listing').find('#order_item_quantity').val('')
+  $(this).parents('.listing').find('#order_item_pickup_date').val('')
   $(this).children().remove()
   $(this).append $('<button>').text('Add').addClass('add-order-item btn btn-success')
 
