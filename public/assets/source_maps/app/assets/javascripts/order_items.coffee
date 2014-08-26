@@ -6,6 +6,27 @@
   .done $.proxy(addToOrder, this)
   event.preventDefault
 
+@updateOrderItem = (event) ->
+  $(this).prop('disabled', true)
+  _quantity = $(this).parents('.listing').find('#order_item_quantity').val()
+  _pickupDate = $(this).parents('.listing').find('#order_item_pickup_date').val()
+  _data = order_item: { quantity: _quantity, pickup_date: _pickupDate }
+  $.ajax
+    url: Routes.order_item_path($(this).parents('.listing').data('order-item')),
+    type: 'PATCH',
+    data: _data,
+    dataType: 'json'
+  .fail $.proxy((jqXHR) ->
+    if jqXHR.status is 422
+      validationFailure jqXHR.responseJSON.errors, $(this)
+    else
+      genericFailure jqXHR
+  , this)
+  .always $.proxy( ->
+    $(this).prop('disabled', false);
+  , this)
+  event.preventDefault
+
 @addToOrder = (data) ->
   _postingId = data.id
   _quantity = $(this).parents('.listing').find('#order_item_quantity').val()
@@ -31,10 +52,10 @@
   event.preventDefault
 
 @addEditAndDelete = (data) ->
+  $(this).parents('.listing').data('order-item', data.id)
   $(this).children().remove()
-  $(this).append $('<button>').text('Update').addClass('update-order btn btn-primary')
-  $(this).append $('<button>').text('Delete').addClass('delete-from-order btn btn-danger')
-  event.preventDefault
+  $(this).append $('<button>').text('Update').addClass('update-order-item btn btn-primary')
+  $(this).append $('<button>').text('Delete').addClass('delete-order-item btn btn-danger')
 
 @validationFailure = (errors, $form) ->
   errorString = $.map(errors, (messages, attribute) ->
@@ -46,15 +67,14 @@
   $form.tooltip
     title: errorString
     trigger: "manual"
-    placement: "right"
+    placement: "top"
 
   $form.tooltip "show"
   setTimeout (->
     $form.tooltip "destroy"
     return
   ), 2000
-  return
 
-  genericFailure = (jqXHR) ->
-    alert "Error " + jqXHR.status + " occurred. Try refreshing maybe?"
+@genericFailure = (jqXHR) ->
+  alert "Error " + jqXHR.status + " occurred. Try refreshing maybe?"
 

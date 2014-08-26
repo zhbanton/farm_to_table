@@ -10,7 +10,13 @@ class OrderItemsController < ApplicationController
     order_item = OrderItem.new(order_item_params)
     order_item.order = @order
     order_item.save
-    respond_with order_item
+    respond_with(order_item)
+  end
+
+  def update
+    order_item = OrderItem.find(params[:id])
+    order_item.update(order_item_params)
+    respond_with(order_item)
   end
 
   private
