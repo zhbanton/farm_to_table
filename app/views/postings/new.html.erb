@@ -1,3 +1,5 @@
+<%= render 'shared/errors', object: @posting %>
+
 <%= render 'shared/product_heading', product: @product %>
 
 <%= render 'shared/active_and_inactive_postings_list', product: @product %>
@@ -6,13 +8,13 @@
   <div class='col-md-12'>
      <%= form_for [@product, set_posting_default_price_and_unit(@posting)] do |f| %>
       <%= f.label :quantity%><br>
-      <%= f.text_field :quantity%>
+      <%= f.text_field :quantity, type: 'number' %>
       <br>
       <%= f.label :unit %><br>
       <%= f.text_field :unit %>
       <br>
       <%= f.label :price_per_unit %><br>
-      <%= f.text_field :price_per_unit %>
+      <%= f.text_field :price_per_unit, precision: 8, scale: 2 %>
       <br>
       <%= f.label :starting_date %>
       <%= f.date_field :starting_date, value: Date.today, min: Date.today %>

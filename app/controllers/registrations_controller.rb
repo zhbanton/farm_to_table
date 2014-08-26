@@ -30,8 +30,6 @@ class RegistrationsController < Devise::RegistrationsController
       if @validatable
         @minimum_password_length = resource_class.password_length.min
       end
-      errors = resource.errors.full_messages + resource.role.errors.full_messages
-      flash.now[:alert] = errors.join(', ')
       render :new
     end
   end
@@ -61,8 +59,6 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource, location: after_update_path_for(resource)
     else
       clean_up_passwords resource
-      errors = resource.errors.full_messages + resource.role.errors.full_messages
-      flash.now[:alert] = errors.join(', ')
       render :edit
     end
   end

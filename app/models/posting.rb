@@ -16,8 +16,14 @@
 class Posting < ActiveRecord::Base
 
   belongs_to :product
+  belongs_to :farm
+  has_many :order_items, dependent: :destroy
 
   validates :quantity, :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
+
+  def available_pickup_days
+    (self.starting_date..self.expiration_date).find_all { |day| product.farm.business_days.map(&:day).include? day.strftime("%A") }
+  end
 
   def total_value
     price_per_unit * quantity

@@ -2,10 +2,15 @@ class PostingsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_product, only: [:new, :create]
-  # before_action :set_posting, only: [:edit, :update, :destroy]
+  before_action :set_posting, only: :show # [:edit, :update, :destroy]
+  respond_to :json
 
   def index
     @farm = current_user.role
+  end
+
+  def show
+    respond_with @posting
   end
 
   def new
@@ -18,7 +23,6 @@ class PostingsController < ApplicationController
     if @posting.save
       redirect_to farm_postings_path(current_user), notice: "posting for #{@product.name} created"
     else
-      flash.now[:alert] = @posting.errors.full_messages.join(', ')
       render :new
     end
   end
@@ -27,7 +31,6 @@ class PostingsController < ApplicationController
   #   if @posting.update(posting_params)
   #     redirect_to product_postings_path(@product), notice: "posting for #{@product.name} updated"
   #   else
-  #     flash.now[:alert] = @posting.errors.full_messages.join(', ')
   #     render :edit
   #   end
   # end
@@ -49,7 +52,7 @@ class PostingsController < ApplicationController
   end
 
   def set_posting
-    @posting = @product.postings.find(params[:id])
+    @posting = Posting.find(params[:id])
   end
 
 end

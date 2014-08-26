@@ -1,4 +1,7 @@
 <%= form_for [@farm, @product] do |f| %>
+
+  <%= render 'shared/errors', object: @product %>
+
   <%= f.label :name %><br>
   <%= f.text_field :name %>
   <br>
@@ -9,7 +12,7 @@
   <%= f.text_area :description %>
   <br>
   <%= f.label :default_price %>
-  <%= f.text_field :default_price %>
+  <%= f.text_field :default_price, precision: 8, scale: 2 %>
   <br>
   <%= f.label :default_unit %>
   <%= f.text_field :default_unit %>

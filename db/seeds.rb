@@ -12,6 +12,7 @@ end
 
 Farm.all.each do |farm|
   farm.products = FactoryGirl.create_list(:product, rand(12))
+  farm.business_days = [BusinessDay.create!(day: 'Monday')]
 end
 
 Product.all.each do |product|

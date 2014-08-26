@@ -1,1 +1,33 @@
-
+<% if user_signed_in? %>
+    <% if current_user.role_type == 'Organization' %>
+    <% @farms.each do |farm| %>
+      <% if farm.active_postings_by_date.present? %>
+        <h4><%= farm.user.name.capitalize %></h4>
+        <% farm.active_postings_by_name.each do |posting| %>
+          <%= form_for setup_order_item(@order, posting) do |f| %>
+            <div class='listing' data-posting=<%= posting.id %> <% if f.object.persisted? %> data-order-item=<%= f.object.id %><% end %>>
+              <span><%= name_and_variety_to_s(posting.product) %> |</span>
+              <span>quantity remaining: <%= quantity_to_s(posting) %> |</span>
+              <span><%= quantity_per_unit(posting) %> |</span>
+              <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(posting), include_blank: true %></span>
+              <span><%= f.text_field :quantity, type: 'number', class: 'quantity' %>|</span>
+              <% if f.object.persisted? %>
+                <span>
+                  <button type='button' class='update-order-item btn btn-primary'>Update</button>
+                  <button type='button' class='remove-order-item btn btn-danger'>Remove</button>
+                </span>
+              <% else %>
+                <span><button type='button' class='add-order-item btn btn-success'>Add</button></span>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+        <br>
+      <% end %>
+    <% end %>
+    <% else %>
+      <p>Welcome to FarmToTable
+    <% end %>
+<% else %>
+  <p>Welcome to FarmToTable</p>
+<% end %>

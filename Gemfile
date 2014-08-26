@@ -29,9 +29,12 @@ gem 'bootstrap-sass', '~> 3.2.0'
 
 gem 'autoprefixer-rails'
 
+gem 'js-routes'
+
 group :development do
   gem 'spring'
   gem 'annotate'
+  gem 'coffee-rails-source-maps'
 end
 
 group :development, :test do

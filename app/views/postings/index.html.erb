@@ -1,6 +1,6 @@
 <h3>Active Postings</h3>
-<% if @farm.active_postings.present? %>
-  <%= render 'shared/postings_list', postings: @farm.active_postings %>
+<% if @farm.active_postings_by_date.present? %>
+  <%= render 'shared/postings_list', postings: @farm.active_postings_by_date %>
 <% else %>
   <p>You don't have any active postings.</p>
 <% end %>

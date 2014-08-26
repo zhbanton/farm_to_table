@@ -24,14 +24,27 @@ ActionView::Helpers::NumberHelper
     role
   end
 
+  def setup_order_item(order, posting)
+    associated_items = order.order_items.where(posting: posting)
+    if associated_items.present?
+      return associated_items.first
+    end
+    OrderItem.new
+  end
+
+
   def set_posting_default_price_and_unit(posting)
     posting.unit = posting.product.default_unit.present? ? posting.product.default_unit : posting.last_associated_posting_unit
     posting.price_per_unit = posting.product.default_price.present? ? posting.product.default_price : posting.last_associated_posting_price
     posting
   end
 
-  def quantity_to_s(posting)
-    "#{posting.quantity} #{posting.unit.pluralize}"
+  def quantity_to_s(object)
+    "#{object.quantity} #{object.unit.pluralize}"
+  end
+
+  def quantity_per_unit(object)
+    "#{number_to_currency(object.price_per_unit)}/#{object.unit.singularize}"
   end
 
   def name_and_variety_to_s(product)
@@ -45,6 +58,10 @@ ActionView::Helpers::NumberHelper
     qualifications << 'no-spray' if product.no_spray?
     qualifications << 'low-spray' if product.low_spray?
     qualifications.split.join(', ')
+  end
+
+  def available_pickup_days_select(posting)
+    posting.available_pickup_days.collect { |d| [d, d] }
   end
 
 end
