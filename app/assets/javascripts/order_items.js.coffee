@@ -16,6 +16,9 @@
     type: 'PATCH',
     data: _data,
     dataType: 'json'
+  .done $.proxy( ->
+    updateSuccess $(this)
+  , this)
   .fail $.proxy((jqXHR) ->
     if jqXHR.status is 422
       validationFailure jqXHR.responseJSON.errors, $(this)
@@ -75,6 +78,20 @@
     return
   ), 2000
 
+@updateSuccess = ($form) ->
+  $form.tooltip "destroy"
+  $form.tooltip
+    title: "order updated"
+    trigger: "manual"
+    placement: "top"
+
+  $form.tooltip "show"
+  setTimeout (->
+    $form.tooltip "destroy"
+    return
+  ), 2000
+
 @genericFailure = (jqXHR) ->
   alert "Error " + jqXHR.status + " occurred. Try refreshing maybe?"
+
 
