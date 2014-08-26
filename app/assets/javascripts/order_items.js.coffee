@@ -33,7 +33,7 @@
 @updateOrderItem = (event) ->
   $(this).prop('disabled', true)
   _quantity = $(this).parents('.listing').find('#order_item_quantity').val()
-  _pickupDate = $(this).parents('.listing').find('#order_item_pickup_date').prop('selectedIndex', 0)
+  _pickupDate = $(this).parents('.listing').find('#order_item_pickup_date').val()
   _data = order_item: { quantity: _quantity, pickup_date: _pickupDate }
   $.ajax
     url: Routes.order_item_path($(this).parents('.listing').data('order-item')),

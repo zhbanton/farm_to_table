@@ -1,27 +1,22 @@
 <h3>Current Order</h3>
 <% if @order.order_items.present? %>
-  <table>
-    <thead>
-      <th>Item</th>
-      <th>Farm</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th>Pickup Date</th>
-      <th>Total Cost</th>
-    <thead>
-    <tbody>
-      <% @order.order_items.each do |item| %>
-        <tr>
-          <td><%= name_and_variety_to_s(item.posting.product) %></td>
-          <td><%= item.posting.product.farm.user.name %></td>
-          <td><%= quantity_to_s(item) %></td>
-          <td><%= quantity_per_unit(item) %></td>
-          <td><%= item.pickup_date %></td>
-          <td><%= number_to_currency(item.total_cost) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <% @order.order_items.each do |item| %>
+    <%= form_for item do |f| %>
+      <div class='listing' data-posting=<%= item.posting.id %> data-order-item=<%= item.id %>>
+        <span><%= item.posting.product.farm.user.name %> |</span>
+        <span><%= name_and_variety_to_s(item.posting.product) %> |</span>
+        <span>quantity remaining: <%= quantity_to_s(item.posting) %> |</span>
+        <span><%= quantity_per_unit(item) %> |</span>
+        <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(item.posting), include_blank: true %></span>
+        <span><%= f.text_field :quantity, type: 'number', class: 'quantity' %>|</span>
+        <span>
+          <button type='button' class='update-order-item btn btn-primary'>Update</button>
+          <button type='button' class='remove-order-item btn btn-danger'>Remove</button>
+        </span>
+      </div>
+    <% end %>
+  <% end %>
+  <%= button_to 'complete order', organization_order_path(current_user.role, @order), method: :patch, data: {confirm: "Are you sure you want to complete your order?  You will not be able to go back and edit it once it is completed."} %>
 <% else %>
   <p>You haven't selected any products yet</p>
 <% end %>

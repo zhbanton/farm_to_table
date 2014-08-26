@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :postings, only: [:show]
 
   resources :organizations, only: [] do
-    resources :orders, only: [:index, :show, :new, :create]
+    resources :orders, only: [:index, :show, :new, :update]
   end
 
   resources :order_items, only: [:create, :update, :destroy]
