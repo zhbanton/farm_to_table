@@ -60,8 +60,8 @@ ActionView::Helpers::NumberHelper
     qualifications.split.join(', ')
   end
 
-  def available_pickup_days_select(posting)
-    posting.available_pickup_days.collect { |d| [d, d] }
+  def available_pickup_days_select(posting, date)
+    posting.available_pickup_days_after_given_date(date).collect { |d| [d, d] }
   end
 
 end

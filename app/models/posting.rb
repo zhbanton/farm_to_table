@@ -21,10 +21,6 @@ class Posting < ActiveRecord::Base
 
   validates :quantity, :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
 
-  def available_pickup_days
-    (self.starting_date..self.expiration_date).find_all { |day| product.farm.business_days.map(&:day).include? day.strftime("%A") }
-  end
-
   def total_value
     price_per_unit * quantity
   end
@@ -39,6 +35,18 @@ class Posting < ActiveRecord::Base
 
   def last_associated_posting
     product.postings.order(:created_at).last
+  end
+
+  def available_pickup_days_after_given_date(date)
+    available_pickup_days.find_all { |day| day > date }
+  end
+
+  private
+
+  def available_pickup_days
+    (self.starting_date..self.expiration_date).find_all do |day|
+      product.farm.business_days.map(&:day).include? day.strftime("%A")
+    end
   end
 
 end

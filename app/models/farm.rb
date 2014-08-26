@@ -20,11 +20,13 @@ class Farm < ActiveRecord::Base
   validates :minimum_order, numericality: true
 
   def active_postings_by_date
-    postings.where('expiration_date >= ?', Date.today).order(:starting_date, :expiration_date)
+    active_postings = postings.where('expiration_date >= ?', Date.today).order(:starting_date, :expiration_date)
+    active_postings.find_all { |posting| posting.available_pickup_days_after_given_date(Date.tomorrow).present? }
   end
 
   def active_postings_by_name
-    postings.includes(:product).where('postings.expiration_date >= ?', Date.today).order('products.name', :starting_date)
+    active_postings = postings.includes(:product).where('postings.expiration_date >= ?', Date.today).order('products.name', :starting_date)
+    active_postings.find_all { |posting| posting.available_pickup_days_after_given_date(Date.tomorrow).present? }
   end
 
   def inactive_postings

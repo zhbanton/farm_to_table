@@ -16,9 +16,8 @@ class Organization < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :order_items, through: :orders
 
-
-  def order_items_by_pickup_date
-    order_items.where('pickup_date < ?', Date.today).order(:pickup_date)
+  def active_orders
+    orders.(is_completed: true).find_all { |o| o.last_pickup_date > Date.today }
   end
 
 end

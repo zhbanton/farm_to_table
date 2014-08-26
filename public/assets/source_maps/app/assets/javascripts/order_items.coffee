@@ -18,7 +18,7 @@
     type: 'POST',
     data: _data,
     dataType: 'json'
-  .done $.proxy(addEditAndRemove, $(this).parent())
+  .done $.proxy(addEditAndRemove, $(this).parents('.action-buttons').first())
   .fail $.proxy((jqXHR) ->
     if jqXHR.status is 422
       validationFailure jqXHR.responseJSON.errors, $(this)
@@ -59,7 +59,7 @@
   $.ajax
     url: Routes.order_item_path($(this).parents('.listing').data('order-item')),
     type: 'DELETE'
-  .done $.proxy(addAddButton, $(this).parent())
+  .done $.proxy(addAddButton, $(this).parents('.action-buttons').first())
   .fail $.proxy((jqXHR) ->
     genericFailure jqXHR
   , this)
