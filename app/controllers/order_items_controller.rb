@@ -19,6 +19,12 @@ class OrderItemsController < ApplicationController
     respond_with(order_item)
   end
 
+  def destroy
+    order_item = OrderItem.find(params[:id])
+    order_item.destroy
+    respond_with(order_item)
+  end
+
   private
 
   def order_item_params
