@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :new, :update]
   end
 
-  resources :order_items, only: [:create, :update, :destroy]
+  resources :order_items, only: [:index, :create, :update, :destroy]
 
   root to: 'home#index'
 

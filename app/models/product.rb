@@ -19,17 +19,11 @@
 
 class Product < ActiveRecord::Base
 
+  include ActivePosting
+
   belongs_to :farm
   has_many :postings
 
   validates :name, presence: true
-
-  def active_postings
-    postings.where('expiration_date >= ?', Date.today).order(:starting_date, :expiration_date)
-  end
-
-  def inactive_postings
-    postings.where('expiration_date < ?', Date.today).order(expiration_date: :desc)
-  end
 
 end

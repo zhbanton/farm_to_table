@@ -14,6 +14,7 @@
     <%= link_to 'view products', farm_products_path(current_user.role) %> |
     <%= link_to 'view postings', farm_postings_path(current_user.role) %> |
   <% elsif current_user.role_type == 'Organization' %>
+    <%= link_to 'add items', order_items_path %>
     <%= link_to 'current order', new_organization_order_path(current_user.role) %>
   <% end %>
   signed in as <%= current_user.email %> |

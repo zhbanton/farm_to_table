@@ -3,8 +3,12 @@ class OrderItemsController < ApplicationController
   include CurrentOrder
 
   before_action :authenticate_user!
-  before_action :set_order, only: :create
-  respond_to :json
+  before_action :set_order, only: [:index, :create]
+  respond_to :json, :html
+
+  def index
+    @farms = Farm.all.includes(:products, :postings)
+  end
 
   def create
     order_item = OrderItem.new(order_item_params)

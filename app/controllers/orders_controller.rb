@@ -3,7 +3,10 @@ class OrdersController < ApplicationController
   include CurrentOrder
 
   before_action :authenticate_user!
-  before_action :set_order
+  before_action :set_order, only: [:new, :update]
+
+  def index
+  end
 
   def show
   end

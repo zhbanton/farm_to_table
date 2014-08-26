@@ -7,8 +7,10 @@ class SessionsController < Devise::SessionsController
   private
 
   def destroy_order
-    set_order
-    @order.destroy
+    if current_user.role == 'Farm'
+      set_order
+      @order.destroy
+    end
   end
 
 end
