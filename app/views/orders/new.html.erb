@@ -1,22 +1,24 @@
 <h3>Current Order</h3>
 <% if @order.order_items.present? %>
-  <% @order.order_items.each do |item| %>
-    <%= form_for item do |f| %>
-      <div class='listing' data-posting=<%= item.posting.id %> data-order-item=<%= item.id %>>
-        <span><%= item.posting.product.farm.user.name %> |</span>
-        <span><%= name_and_variety_to_s(item.posting.product) %> |</span>
-        <span>quantity remaining: <%= quantity_to_s(item.posting) %> |</span>
-        <span><%= quantity_per_unit(item) %> |</span>
-        <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(item.posting), include_blank: true %></span>
-        <span><%= f.text_field :quantity, type: 'number', class: 'quantity' %>|</span>
-        <span>
-          <button type='button' class='update-order-item btn btn-primary'>Update</button>
-          <button type='button' class='remove-order-item btn btn-danger'>Remove</button>
-        </span>
-      </div>
-    <% end %>
+  <% @order.order_items_by_farm.each do |farm, item| %>
+    <h3><%= farm %></h3>
+      <%= form_for item do |f| %>
+        <div class='listing' data-posting=<%= item.posting.id %> data-order-item=<%= item.id %>>
+          <span><%= item.posting.product.farm.user.name %> |</span>
+          <span><%= name_and_variety_to_s(item.posting.product) %> |</span>
+          <span>quantity remaining: <%= quantity_to_s(item.posting) %> |</span>
+          <span><%= quantity_per_unit(item) %> |</span>
+          <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(item.posting), include_blank: true %></span>
+          <span><%= f.text_field :quantity, type: 'number', class: 'quantity' %>|</span>
+          <span>
+            <button type='button' class='update-order-item btn btn-primary'>Update</button>
+            <button type='button' class='remove-order-item btn btn-danger'>Remove</button>
+          </span>
+        </div>
+      <% end %>
   <% end %>
   <%= button_to 'complete order', organization_order_path(current_user.role, @order), method: :patch, data: {confirm: "Are you sure you want to complete your order?  You will not be able to go back and edit it once it is completed."} %>
 <% else %>
   <p>You haven't selected any products yet</p>
 <% end %>
+
