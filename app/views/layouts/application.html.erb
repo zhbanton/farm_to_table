@@ -17,6 +17,7 @@
     <%= link_to 'current order', new_organization_order_path(current_user.role) %> |
     <%= link_to 'view active orders', organization_orders_path(current_user.role) %> |
     <%= link_to 'active orders by pickup date', organization_organization_pickup_days_path(current_user.role) %> |
+    <%= link_to 'order history', organization_order_history_index_path(current_user.role) %> |
   <% end %>
   signed in as <%= current_user.email %> |
   <%= link_to 'edit account', edit_user_registration_path %> |

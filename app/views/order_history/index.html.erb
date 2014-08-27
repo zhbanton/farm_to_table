@@ -1,0 +1,5 @@
+<% @orders.each do |order| %>
+  <div>
+    <%= link_to order.created_at.to_formatted_s(:long_ordinal), organization_order_path(current_user.role, order) %>
+  </div>
+<% end %>
