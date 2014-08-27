@@ -39,7 +39,7 @@ class Order < ActiveRecord::Base
 
   def order_items_with_farm
     order_items.select('users.name as farm_name, order_items.*')
-    .joins(posting: [product: [farm: [:user]]])
+    .joins(posting: {product: {farm: :user}})
     .order('products.name', 'products.variety')
   end
 

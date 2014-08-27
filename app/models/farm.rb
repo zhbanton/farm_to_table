@@ -38,7 +38,7 @@ class Farm < ActiveRecord::Base
 
   def order_items_with_organization
     order_items.select('users.name as organization_name, order_items.*')
-    .joins(order: [organization: [:user]])
+    .joins(order: {organization: :user})
     .where('orders.is_completed = true AND order_items.pickup_date >= ?', Date.today)
     .order('order_items.pickup_date', 'products.name', 'products.variety')
   end

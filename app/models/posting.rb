@@ -38,15 +38,14 @@ class Posting < ActiveRecord::Base
   end
 
   def available_pickup_days_after_given_date(date)
-    available_pickup_days.find_all { |day| day > date }
-  end
-
-  private
-
-  def available_pickup_days
+    return false if self.expiration_date < date
     (self.starting_date..self.expiration_date).find_all do |day|
       product.farm.business_days.map(&:day).include? day.strftime("%A")
     end
+  end
+
+  def quantity_remaining
+    self.order_items.present? ? self.quantity - order_items.map(&:quantity).reduce(:+) : self.quantity
   end
 
 end

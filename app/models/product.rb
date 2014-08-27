@@ -23,6 +23,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :farm
   has_many :postings
+  has_many :order_items, through: :postings
 
   validates :name, presence: true
 

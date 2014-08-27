@@ -25,15 +25,6 @@ class ProductsController < ApplicationController
     else
       render :new
     end
-    # respond_to do |format|
-    #   if @product.save
-    #     format.html { redirect_to @product, notice: 'Line item was successfully created.' }
-    #     format.json { render action: 'show', status: :created, location: @product }
-    #   else
-    #     format.html { render action: 'new' }
-    #     format.json { render json: @product.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def update
