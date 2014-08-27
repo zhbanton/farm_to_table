@@ -15,4 +15,13 @@ class BusinessDay < ActiveRecord::Base
 
   belongs_to :farm
 
+  validates_uniqueness_of :day, scope: :farm
+  validate :opening_before_closing
+
+  def opening_before_closing
+    if self.opening_time > self.closing_time
+      errors.add(:closing_time, "cannot be before opening time")
+    end
+  end
+
 end

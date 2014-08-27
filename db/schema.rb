@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825041821) do
+ActiveRecord::Schema.define(version: 20140827211530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "business_days", force: true do |t|
     t.string   "day"
-    t.string   "opening_time"
-    t.string   "closing_time"
     t.integer  "farm_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.time     "opening_time"
+    t.time     "closing_time"
   end
 
   add_index "business_days", ["farm_id"], name: "index_business_days_on_farm_id", using: :btree
