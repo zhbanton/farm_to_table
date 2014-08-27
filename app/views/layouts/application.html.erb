@@ -13,6 +13,7 @@
     <%= link_to 'create new product', new_farm_product_path(current_user.role) %> |
     <%= link_to 'view products', farm_products_path(current_user.role) %> |
     <%= link_to 'view postings', farm_postings_path(current_user.role) %> |
+    <%= link_to 'view active orders', farm_farm_pickup_days_path(current_user.role) %> |
   <% elsif current_user.role_type == 'Organization' %>
     <%= link_to 'current order', new_organization_order_path(current_user.role) %> |
     <%= link_to 'view active orders', organization_orders_path(current_user.role) %> |

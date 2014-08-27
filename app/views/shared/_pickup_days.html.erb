@@ -1,0 +1,32 @@
+<% if pickup_days.present? %>
+  <% pickup_days.each do |day, farm| %>
+    <h3><%= format_date(day) %></h3>
+    <% farm.each do |farm| %>
+      <h5><%= farm.first.capitalize %></h5>
+      <table class='table table-striped'>
+        <thead>
+          <th>product</th>
+          <th>quantity</th>
+          <th>price</th>
+          <th>total price</th>
+          <th>ordered on</th>
+        </thead>
+        <tbody>
+        <% farm.last.each do |item| %>
+          <tr>
+            <td><%= name_and_variety_to_s(item.posting.product) %></td>
+            <td><%= quantity_to_s(item) %></td>
+            <td><%= quantity_per_unit(item) %></td>
+            <td><%= number_to_currency(item.total_cost) %></td>
+            <td><%= item.order.created_at.to_formatted_s(:long_ordinal) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <p>farm total: <%= number_to_currency(farm.last.map(&:total_cost).reduce(:+)) %></p>
+    <% end %>
+    <p>day total: <%= number_to_currency(@pickup_days[day].map { |day| day.last }.flatten.map(&:total_cost).reduce(:+)) %></p>
+  <% end %>
+<% else %>
+  <p>You have no active orders</p>
+<% end %>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :farms, only: [] do
     resources :products
     resources :postings, only: [:index]
+    resources :farm_pickup_days, only: [:index]
   end
 
   resources :products, only: [] do
