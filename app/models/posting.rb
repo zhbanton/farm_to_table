@@ -50,11 +50,5 @@ class Posting < ActiveRecord::Base
     self.order_items.present? ? self.quantity - order_items.map(&:quantity).reduce(:+) : self.quantity
   end
 
-  def quantity_must_be_whole_or_half
-    unless self.quantity - self.quantity.to_i == 0.5 || self.quantity - self.quantity.to_i == 0
-      errors.add(:quantity, "can only provide quantity in whole or half units")
-    end
-  end
-
 end
 

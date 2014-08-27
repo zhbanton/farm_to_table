@@ -31,6 +31,8 @@ gem 'autoprefixer-rails'
 
 gem 'js-routes'
 
+gem 'phony_rails'
+
 group :development do
   gem 'spring'
   gem 'annotate'

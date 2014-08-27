@@ -36,5 +36,17 @@ class User < ActiveRecord::Base
   validates :role, presence: true
   validates :name, presence: true
   validates_format_of :website, with: URI::regexp(%w(http https)), allow_blank: true
+  validate :convert_phone_number
+
+
+  private
+
+  def convert_phone_number
+    begin
+      self.phone_number.phony_formatted!(:normalize => :US, :spaces => '-')
+    rescue
+      errors.add(:phone_number, 'is invalid') if self.phone_number != ''
+    end
+  end
 
 end
