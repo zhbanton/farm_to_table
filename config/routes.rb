@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :organizations, only: [] do
     resources :orders, only: [:index, :show, :new, :update]
+    resources :organization_pickup_days, only: [:index]
   end
 
   resources :order_items, only: [:index, :create, :update, :destroy]

@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:new, :update]
 
   def index
+    @orders = current_user.role.active_orders
   end
 
   def show

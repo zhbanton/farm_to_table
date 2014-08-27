@@ -21,4 +21,34 @@ class Farm < ActiveRecord::Base
 
   validates :minimum_order, numericality: true
 
+  def order_items_by_pickup_date
+    items_by_pickup = {}
+    order_items_with_organization.each do |item|
+      if items_by_pickup.has_key? item.pickup_date.to_s
+        create_or_add_to_organization_name(items_by_pickup, item)
+      else
+        items_by_pickup[item.pickup_date.to_s] = {}
+        items_by_pickup[item.pickup_date.to_s][item.organization_name] = [item]
+      end
+    end
+    items_by_pickup
+  end
+
+  private
+
+  def order_items_with_organization
+    order_items.select('users.name as organization_name, order_items.*')
+    .joins(order: [organization: [:user]])
+    .where('orders.is_completed = true AND order_items.pickup_date >= ?', Date.today)
+    .order('products.name', 'products.variety')
+  end
+
+  def create_or_add_to_organization_name(items_by_pickup, item)
+    if items_by_pickup[item.pickup_date.to_s].has_key? item.organization_name
+      items_by_pickup[item.pickup_date.to_s][item.organization_name] << item
+    else
+      items_by_pickup[item.pickup_date.to_s][item.organization_name] = [item]
+    end
+  end
+
 end

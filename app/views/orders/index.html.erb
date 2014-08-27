@@ -1,0 +1,36 @@
+<h3>Active Orders</h3>
+<% if @orders.present? %>
+  <% @orders.each do |order| %>
+    <h3><%= order.created_at.to_formatted_s(:long_ordinal) %></h3>
+    <% order.order_items_by_farm.each do |farm, items| %>
+      <h5><%= farm.capitalize %></h5>
+      <table class='table table-striped'>
+        <thead>
+          <th>product</th>
+          <th>quantity</th>
+          <th>price</th>
+          <th>total price</th>
+          <th>pickup date</th>
+        </thead>
+        <tbody>
+        <% items.each do |item| %>
+          <tr>
+            <td><%= name_and_variety_to_s(item.posting.product) %></td>
+            <td><%= quantity_to_s(item) %></td>
+            <td><%= quantity_per_unit(item) %></td>
+            <td><%= number_to_currency(item.total_cost) %></td>
+            <td><%= item.pickup_date %></td>
+          <tr>
+        <% end %>
+        </tbody>
+      </table>
+      <p>farm total: <%= number_to_currency(items.map(&:total_cost).reduce(:+)) %>
+    <% end %>
+    <p>subtotal: <%= number_to_currency(order.subtotal) %></p>
+  <% end %>
+<% else %>
+  <p>You have no active orders</p>
+<% end %>
+
+
+

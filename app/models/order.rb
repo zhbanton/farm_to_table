@@ -21,7 +21,7 @@ class Order < ActiveRecord::Base
   # create hash of all order items, key as farm name, maps to all order items
   def order_items_by_farm
     items_by_farm = {}
-    order_items.select('users.name as farm_name, order_items.*').joins(posting: [product: [farm: [:user]]]).each do |item|
+    order_items_with_farm.each do |item|
       if items_by_farm.has_key? item.farm_name
         items_by_farm[item.farm_name] << item
       else
@@ -29,6 +29,18 @@ class Order < ActiveRecord::Base
       end
     end
     items_by_farm
+  end
+
+  def subtotal
+    order_items.map(&:total_cost).reduce(0, &:+)
+  end
+
+  private
+
+  def order_items_with_farm
+    order_items.select('users.name as farm_name, order_items.*')
+    .joins(posting: [product: [farm: [:user]]])
+    .order('products.name', 'products.variety')
   end
 
 end

@@ -1,5 +1,6 @@
 module FormHelper
 
+require 'date'
 ActionView::Helpers::NumberHelper
 
   # available hours for farm to be open for pickup
@@ -62,6 +63,10 @@ ActionView::Helpers::NumberHelper
 
   def available_pickup_days_select(posting, date)
     posting.available_pickup_days_after_given_date(date).collect { |d| [d, d] }
+  end
+
+  def format_date(date)
+    Date.parse(date).to_formatted_s(:long_ordinal)
   end
 
 end

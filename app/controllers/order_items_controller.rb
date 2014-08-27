@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
   respond_to :json, :html
 
   def index
-    @farms = Farm.all.includes(:products, :postings)
+    @farms = Farm.all.includes(:business_days, :products, :postings)
   end
 
   def create
