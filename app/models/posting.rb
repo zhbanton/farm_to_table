@@ -20,7 +20,8 @@ class Posting < ActiveRecord::Base
   has_many :order_items, dependent: :destroy
 
   validates :quantity, :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
-  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
+  validates :quantity, numericality: { greater_than: 0 }
+  validates :quantity, format: { with: /\A\d+([.,][05]?)?\z/, message: "must be whole or half unit" }
 
   def total_value
     price_per_unit * quantity
@@ -47,6 +48,12 @@ class Posting < ActiveRecord::Base
 
   def quantity_remaining
     self.order_items.present? ? self.quantity - order_items.map(&:quantity).reduce(:+) : self.quantity
+  end
+
+  def quantity_must_be_whole_or_half
+    unless self.quantity - self.quantity.to_i == 0.5 || self.quantity - self.quantity.to_i == 0
+      errors.add(:quantity, "can only provide quantity in whole or half units")
+    end
   end
 
 end

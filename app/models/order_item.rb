@@ -18,7 +18,8 @@ class OrderItem < ActiveRecord::Base
   belongs_to :posting
 
   validates :quantity, :pickup_date, :price_per_unit, :unit, presence: true
-  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
+  validates :quantity, numericality: { greater_than: 0 }
+  validates :quantity, format: { with: /\A\d+([.,][05]?)?\z/, message: "must be whole or half unit" }
   validate :quantity_remaining_greater_than_zero
 
   def total_cost

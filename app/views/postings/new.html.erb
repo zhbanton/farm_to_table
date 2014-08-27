@@ -8,7 +8,7 @@
   <div class='col-md-12'>
      <%= form_for [@product, set_posting_default_price_and_unit(@posting)] do |f| %>
       <%= f.label :quantity%><br>
-      <%= f.text_field :quantity, type: 'number' %>
+      <%= f.number_field :quantity, step: 0.5 %>
       <br>
       <%= f.label :unit %><br>
       <%= f.text_field :unit %>

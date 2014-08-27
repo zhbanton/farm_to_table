@@ -9,7 +9,7 @@
             <span>quantity remaining: <%= quantity_to_s(item.posting) %> |</span>
             <span><%= quantity_per_unit(item) %> |</span>
             <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(item.posting, Date.tomorrow), include_blank: true %></span>
-            <span><%= f.text_field :quantity, type: 'number', class: 'quantity' %>|</span>
+            <span><%= f.number_field :quantity, step: 0.5, class: 'quantity' %>|</span>
             <span class='action-buttons'>
               <button type='button' class='update-order-item btn btn-primary'>Update</button>
               <button type='button' class='remove-order-item btn btn-danger'>Remove</button>
