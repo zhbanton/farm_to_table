@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
   def update
     if @order.update(is_completed: true)
-      redirect_to root_path, notice: "Your order was placed"
+      redirect_to organization_order_path(current_user.role, @order), notice: "Your order was placed"
       session[:order_id] = nil
     else
       render :new
