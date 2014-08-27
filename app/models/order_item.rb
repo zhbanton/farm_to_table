@@ -18,6 +18,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :posting
 
   validates :quantity, :pickup_date, :price_per_unit, :unit, presence: true
+  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 
   def total_cost
     quantity * price_per_unit

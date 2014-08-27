@@ -20,6 +20,7 @@ class Posting < ActiveRecord::Base
   has_many :order_items, dependent: :destroy
 
   validates :quantity, :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
+  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 
   def total_value
     price_per_unit * quantity
