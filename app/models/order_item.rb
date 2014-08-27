@@ -21,6 +21,7 @@ class OrderItem < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0 }
   validates :quantity, format: { with: /\A\d+([.,][05]?)?\z/, message: "must be whole or half unit" }
   validate :quantity_remaining_greater_than_zero
+  validates_uniqueness_of :order_id, scope: :posting_id
 
   def total_cost
     quantity * price_per_unit
