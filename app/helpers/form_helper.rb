@@ -40,8 +40,8 @@ ActionView::Helpers::NumberHelper
     posting
   end
 
-  def quantity_to_s(object)
-    "#{object.quantity} #{object.unit.pluralize}"
+  def quantity_to_s(object, quantity)
+    "#{quantity} #{object.unit.pluralize}"
   end
 
   def quantity_per_unit(object)
