@@ -32,12 +32,6 @@ class OrderItem < ActiveRecord::Base
 
   private
 
-  # def quantity_remaining_greater_than_zero
-  #   if posting.quantity_remaining - self.quantity < 0
-  #     errors.add(:quantity, "can't exceed amount farm has in stock")
-  #   end
-  # end
-
   def quantity_remaining_greater_than_zero
     unless self.persisted?
       if posting.quantity_remaining - self.quantity < 0
