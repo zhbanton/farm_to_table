@@ -13,6 +13,8 @@ class OrderItemsController < ApplicationController
   def create
     order_item = OrderItem.new(order_item_params)
     order_item.order = @order
+    order_item.price_per_unit = order_item.posting.price_per_unit
+    order_item.unit = order_item.posting.unit
     order_item.save
     respond_with(order_item)
   end
@@ -32,7 +34,7 @@ class OrderItemsController < ApplicationController
   private
 
   def order_item_params
-    params.require(:order_item).permit(:posting_id, :quantity, :pickup_date, :unit, :price_per_unit)
+    params.require(:order_item).permit(:posting_id, :quantity, :pickup_date)
   end
 
 end

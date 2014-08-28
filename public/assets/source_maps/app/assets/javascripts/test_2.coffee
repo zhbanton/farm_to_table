@@ -16,9 +16,7 @@
     type: 'POST',
     data: _data,
     dataType: 'json'
-  .done $.proxy((data) ->
-    addEditAndRemove(data, $(this).parents('.action-buttons').first())
-  , this)
+  .done $.proxy(addEditAndRemove, $(this).parents('.action-buttons').first())
   .fail $.proxy((jqXHR) ->
     if jqXHR.status is 422
       validationFailure jqXHR.responseJSON.errors, $(this)
@@ -59,12 +57,9 @@
   $.ajax
     url: Routes.order_item_path($(this).parents('.listing').data('order-item')),
     type: 'DELETE'
-  .done $.proxy((data) ->
-    if $(this).hasClass('remove-order-item')
-      addAddButton(data, $(this).parents('.action-buttons').first())
-    else
-      $(this).parents('.listing').remove()
-  , this)
+  .done $.proxy($(this) ->
+    if this.hasClass('remove-order-item')
+      addAddButton $.proxy addAddButton(data), s$(this).parents('.action-buttons').first())
   .fail $.proxy((jqXHR) ->
     genericFailure jqXHR
   , this)
@@ -73,18 +68,18 @@
   , this)
   event.preventDefault
 
-@addEditAndRemove = (data, $form) ->
-  $form.parents('.listing').data('order-item', data.id)
-  $form.children().remove()
-  $form.append $('<button>').text('Update').addClass('update-order-item btn btn-primary')
-  $form.append $('<button>').text('Remove').addClass('remove-order-item btn btn-danger')
+@addEditAndRemove = (data) ->
+  $(this).parents('.listing').data('order-item', data.id)
+  $(this).children().remove()
+  $(this).append $('<button>').text('Update').addClass('update-order-item btn btn-primary')
+  $(this).append $('<button>').text('Remove').addClass('remove-order-item btn btn-danger')
 
-@addAddButton = (data, $form) ->
-  $form.parents('.listing').removeData('order-item')
-  $form.parents('.listing').find('#order_item_quantity').val('')
-  $form.parents('.listing').find('#order_item_pickup_date').val('')
-  $form.children().remove()
-  $form.append $('<button>').text('Add').addClass('add-order-item btn btn-success')
+@addAddButton = (data) ->
+  $(this).parents('.listing').removeData('order-item')
+  $(this).parents('.listing').find('#order_item_quantity').val('')
+  $(this).parents('.listing').find('#order_item_pickup_date').val('')
+  $(this).children().remove()
+  $(this).append $('<button>').text('Add').addClass('add-order-item btn btn-success')
 
 @validationFailure = (errors, $form) ->
   errorString = $.map(errors, (messages, attribute) ->

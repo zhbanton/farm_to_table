@@ -56,8 +56,8 @@ class Posting < ActiveRecord::Base
   private
 
   def starting_date_before_ending_date
-    if self.starting_date > self.expiration_date
-      errors.add(:expiration_date, "cannot be before starting date")
+    if self.starting_date >= self.expiration_date
+      errors.add(:expiration_date, "cannot be on or before starting date")
     end
   end
 

@@ -6,13 +6,13 @@
         <%= form_for item do |f| %>
           <div class='listing' data-posting=<%= item.posting.id %> data-order-item=<%= item.id %>>
             <span><%= name_and_variety_to_s(item.posting.product) %> |</span>
-            <span>quantity remaining: <%= quantity_to_s(item.posting) %> |</span>
+            <span>quantity remaining: <%= "#{item.posting.quantity_remaining} #{item.posting.unit.pluralize}" %> |</span>
             <span><%= quantity_per_unit(item) %> |</span>
             <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(item.posting, Date.tomorrow), include_blank: true %></span>
             <span><%= f.number_field :quantity, step: 0.5, class: 'quantity' %>|</span>
             <span class='action-buttons'>
               <button type='button' class='update-order-item btn btn-primary'>Update</button>
-              <button type='button' class='remove-order-item btn btn-danger'>Remove</button>
+              <button type='button' class='remove-order-item-order-page btn btn-danger'>Remove</button>
             </span>
           </div>
         <% end %>
