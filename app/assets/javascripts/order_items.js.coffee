@@ -20,6 +20,7 @@
     addEditAndRemove(data, $(this).parents('.action-buttons').first())
   , this)
   .fail $.proxy((jqXHR) ->
+    clearQuantity $(this)
     if jqXHR.status is 422
       validationFailure jqXHR.responseJSON.errors, $(this)
     else
@@ -44,6 +45,7 @@
     updateSuccess $(this)
   , this)
   .fail $.proxy((jqXHR) ->
+    resetQuantity $(this)
     if jqXHR.status is 422
       validationFailure jqXHR.responseJSON.errors, $(this)
     else
@@ -115,6 +117,21 @@
   setTimeout (->
     $form.tooltip "destroy"
     return
+  ), 2000
+
+@resetQuantity = ($form) ->
+  setTimeout (->
+    $.ajax
+      url: Routes.order_item_path($form.parents('.listing').data('order-item')),
+      type: 'GET'
+    .done $.proxy((data) ->
+      $form.parents('.listing').find('#order_item_quantity').val(data.quantity)
+    , $form)
+  ), 2000
+
+@clearQuantity = ($form) ->
+  setTimeout ( ->
+    $form.parents('.listing').find('#order_item_quantity').val('')
   ), 2000
 
 @genericFailure = (jqXHR) ->

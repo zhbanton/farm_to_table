@@ -10,6 +10,11 @@ class OrderItemsController < ApplicationController
     @farms = Farm.all.includes(:business_days, :products, :postings, :order_items)
   end
 
+  def show
+    order_item = OrderItem.find(params[:id])
+    respond_with order_item
+  end
+
   def create
     order_item = OrderItem.new(order_item_params)
     order_item.order = @order
