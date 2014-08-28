@@ -6,7 +6,7 @@
         <%= form_for setup_order_item(@order, posting) do |f| %>
           <div class='listing' data-posting=<%= posting.id %> <% if f.object.persisted? %> data-order-item=<%= f.object.id %><% end %>>
             <span><%= name_and_variety_to_s(posting.product) %> |</span>
-            <span>quantity remaining: <%= "#{posting.quantity_remaining} #{posting.unit.pluralize}" %> |</span>
+            <span>quantity remaining: <%= "#{posting.quantity_remaining_without_current_order(f.object.order)} #{posting.unit.pluralize}" %> |</span>
             <span><%= quantity_per_unit(posting) %> |</span>
             <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(posting, Date.tomorrow), include_blank: true %></span>
             <span><%= f.number_field :quantity, step: 0.5, class: 'quantity' %>|</span>
@@ -27,3 +27,4 @@
 <% else %>
   <p>Welcome to FarmToTable</p>
 <% end %>
+

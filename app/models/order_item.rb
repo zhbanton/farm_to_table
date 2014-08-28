@@ -14,6 +14,9 @@
 #
 
 class OrderItem < ActiveRecord::Base
+
+  include ActiveModel::Dirty
+
   belongs_to :order
   belongs_to :posting
 
@@ -29,9 +32,21 @@ class OrderItem < ActiveRecord::Base
 
   private
 
+  # def quantity_remaining_greater_than_zero
+  #   if posting.quantity_remaining - self.quantity < 0
+  #     errors.add(:quantity, "can't exceed amount farm has in stock")
+  #   end
+  # end
+
   def quantity_remaining_greater_than_zero
-    if posting.quantity_remaining - self.quantity < 0
-      errors.add(:quantity, "can't exceed amount farm has in stock")
+    unless self.persisted?
+      if posting.quantity_remaining - self.quantity < 0
+        errors.add(:quantity, "can't exceed amount farm has in stock")
+      end
+    else
+      if posting.quantity_remaining - (self.quantity - self.quantity_was) < 0
+        errors.add(:quantity, "can't exceed amount farm has in stock")
+      end
     end
   end
 

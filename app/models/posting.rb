@@ -53,6 +53,11 @@ class Posting < ActiveRecord::Base
     self.order_items.present? ? self.quantity - order_items.map(&:quantity).reduce(:+) : self.quantity
   end
 
+  def quantity_remaining_without_current_order(order)
+    return self.quantity_remaining if order.nil?
+    self.quantity_remaining + order_items.where(order_id: order.id).first.quantity
+  end
+
   private
 
   def starting_date_before_ending_date
