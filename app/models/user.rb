@@ -38,7 +38,6 @@ class User < ActiveRecord::Base
   validates_format_of :website, with: URI::regexp(%w(http https)), allow_blank: true
   validate :convert_phone_number
 
-
   private
 
   def convert_phone_number

@@ -26,5 +26,6 @@ class Product < ActiveRecord::Base
   has_many :order_items, through: :postings
 
   validates :name, presence: true
+  validates :farm, presence: true
 
 end
