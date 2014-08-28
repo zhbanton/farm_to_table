@@ -16,7 +16,6 @@ class Organization < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :order_items, through: :orders
   validates :business_type, inclusion: { in: BUSINESS_TYPES }
-  validates :user, presence: true
 
   def active_orders
     orders.where(is_completed: true).find_all { |o| o.last_pickup_date > Date.today }

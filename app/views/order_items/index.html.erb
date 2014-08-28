@@ -5,7 +5,7 @@
       <% farm.active_postings_with_order(@order).each do |posting| %>
         <%= form_for setup_order_item(@order, posting) do |f| %>
           <div class='listing' data-posting=<%= posting.id %> <% if f.object.persisted? %> data-order-item=<%= f.object.id %><% end %>>
-            <span><%= name_and_variety_to_s(posting.product) %> |</span>
+            <span class='listing-name'><%= name_and_variety_to_s(posting.product) %></span>
             <span>quantity remaining: <%= "#{posting.quantity_remaining_without_current_order(f.object.order)} #{posting.unit.pluralize}" %> |</span>
             <span><%= quantity_per_unit(posting) %> |</span>
             <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(posting, Date.tomorrow), include_blank: true %></span>

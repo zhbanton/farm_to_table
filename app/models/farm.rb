@@ -21,7 +21,6 @@ class Farm < ActiveRecord::Base
   accepts_nested_attributes_for :business_days, reject_if: proc { |attributes| attributes['opening_time'].empty? || attributes['closing_time'].empty? }, allow_destroy: true
 
   validates :minimum_order, numericality: true, allow_blank: true
-  validates :user, presence: true
 
   def order_items_by_pickup_date
     items_by_pickup = {}

@@ -33,6 +33,12 @@ gem 'js-routes'
 
 gem 'phony_rails'
 
+gem 'factory_girl_rails'
+
+group :production do
+  gem 'rails_12factor'
+end
+
 group :development do
   gem 'spring'
   gem 'annotate'
@@ -40,7 +46,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-byebug'
