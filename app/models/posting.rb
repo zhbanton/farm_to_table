@@ -24,6 +24,7 @@ class Posting < ActiveRecord::Base
   validates :quantity, format: { with: /\A\d+([.,][05]?)?\z/, message: "must be whole or half unit" }
   validates :product, presence: true
   validate :starting_date_before_ending_date
+  validate :starting_date_within_two_months
 
   def total_value
     price_per_unit * quantity
@@ -57,6 +58,12 @@ class Posting < ActiveRecord::Base
   def starting_date_before_ending_date
     if self.starting_date > self.expiration_date
       errors.add(:expiration_date, "cannot be before starting date")
+    end
+  end
+
+  def starting_date_within_two_months
+    if self.starting_date > Date.today + 2.months
+      errors.add(:starting_date, "cannot be more than two months from now")
     end
   end
 
