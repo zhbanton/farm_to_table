@@ -19,9 +19,11 @@ class Posting < ActiveRecord::Base
   belongs_to :farm
   has_many :order_items, dependent: :destroy
 
-  validates :quantity, :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
+  validates :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
   validates :quantity, numericality: { greater_than: 0 }
   validates :quantity, format: { with: /\A\d+([.,][05]?)?\z/, message: "must be whole or half unit" }
+  validates :product, presence: true
+  validate :starting_date_before_ending_date
 
   def total_value
     price_per_unit * quantity
@@ -48,6 +50,14 @@ class Posting < ActiveRecord::Base
 
   def quantity_remaining
     self.order_items.present? ? self.quantity - order_items.map(&:quantity).reduce(:+) : self.quantity
+  end
+
+  private
+
+  def starting_date_before_ending_date
+    if self.starting_date > self.expiration_date
+      errors.add(:expiration_date, "cannot be before starting date")
+    end
   end
 
 end
