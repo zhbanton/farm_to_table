@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
   respond_to :json, :html
 
   def index
-    @farms = Farm.all.includes(:business_days, :products, :postings, :order_items)
+    @farms = Farm.joins(:user).order('users.name')
   end
 
   def show

@@ -9,7 +9,7 @@ class HomeController < ApplicationController
         render "farm_pickup_days/index"
       elsif current_user.role_type == 'Organization'
         set_order
-        @farms = Farm.all.includes(:products, :postings)
+        @farms = Farm.joins(:user).order('users.name')
         render 'order_items/index'
       end
     end
