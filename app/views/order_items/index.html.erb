@@ -1,50 +1,49 @@
-<div class='order-page'>
-  <% if user_signed_in? %>
-    <% @farms.each do |farm| %>
-      <% if farm.active_postings_with_order(@order).present? %>
-        <h4><%= farm.user.name.capitalize %></h4>
-        <div class='row'>
-          <div class='col-md-3'></div>
-          <div class='col-md-4'><p class='order-table-heading'>Quantity Remaining</p></div>
-          <div class='col-md-1'><p class='order-table-heading'>Pickup Date</p></div>
-          <div class='col-md-1'><p class='order-table-heading'>Order Quantity</p></div>
-        </div>
-        <% farm.active_postings_with_order(@order).each do |posting| %>
-          <%= form_for setup_order_item(@order, posting) do |f| %>
-            <div class='listing' data-posting=<%= posting.id %> <% if f.object.persisted? %> data-order-item=<%= f.object.id %><% end %>>
-              <div class="listing-row row">
-                <div class="col-md-1"></div>
-                <div class='col-md-2'>
-                  <%= name_and_variety_to_s(posting.product) %>
-                </div>
-                <div class='col-md-2'>
-                  <strong><%= "#{posting.quantity_remaining_without_current_order(f.object.order)} #{posting.unit.pluralize}" %></strong>
-                </div>
-                <div class='col-md-2'>
-                  <%= quantity_per_unit(posting) %>
-                </div>
-                <div class='pickup-day col-md-1'>
-                  <%= f.select :pickup_date, available_pickup_days_select(posting, Date.tomorrow), include_blank: true %>
-                </div>
-                <div class='col-md-1'>
-                  <%= f.number_field :quantity, step: 0.5, class: 'quantity' %>
-                </div>
-                <div class='action-buttons col-md-3'>
-                  <% if f.object.persisted? %>
-                    <button type='button' class='update-order-item btn btn-primary'>Update</button><button type='button' class='remove-order-item btn btn-danger'>Remove</button>
-                  <% else %>
-                    <button type='button' class='add-order-item btn btn-success'>Add to Order</button>
-                  <% end %>
-                </div>
-              </div>
+<% @farms.each do |farm| %>
+  <% if farm.active_postings_with_order(@order).present? %>
+    <div class='row'>
+      <div class='col-md-1'></div>
+      <div class='col-md-6'><h4><%= farm.user.name.capitalize %></h4></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'></div>
+      <div class='col-md-4'><p class='order-table-heading'>Quantity Remaining</p></div>
+      <div class='col-md-1'><p class='order-table-heading'>Pickup Date</p></div>
+      <div class='col-md-1'><p class='order-table-heading'>Order Quantity</p></div>
+    </div>
+    <% farm.active_postings_with_order(@order).each do |posting| %>
+      <%= form_for setup_order_item(@order, posting) do |f| %>
+        <div class='listing' data-posting=<%= posting.id %> <% if f.object.persisted? %> data-order-item=<%= f.object.id %><% end %>>
+          <div class="listing-row row">
+            <div class="col-md-1"></div>
+            <div class='col-md-2'>
+              <%= name_and_variety_to_s(posting.product) %>
             </div>
-          <% end %>
-        <% end %>
-        <br>
+            <div class='col-md-2'>
+              <strong><%= "#{posting.quantity_remaining_without_current_order(f.object.order)} #{posting.unit.pluralize}" %></strong>
+            </div>
+            <div class='col-md-2'>
+              <%= quantity_per_unit(posting) %>
+            </div>
+            <div class='pickup-day col-md-1'>
+              <%= f.select :pickup_date, available_pickup_days_select(posting, Date.tomorrow), include_blank: true %>
+            </div>
+            <div class='col-md-1'>
+              <%= f.number_field :quantity, step: 0.5, class: 'quantity' %>
+            </div>
+            <div class='action-buttons col-md-3'>
+              <% if f.object.persisted? %>
+                <button type='button' class='update-order-item btn btn-primary'>Update</button><button type='button' class='remove-order-item btn btn-danger'>Remove</button>
+              <% else %>
+                <button type='button' class='add-order-item btn btn-success'>Add to Order</button>
+              <% end %>
+            </div>
+          </div>
+        </div>
       <% end %>
     <% end %>
-  <% else %>
-    <p>Welcome to FarmToTable</p>
+    <br>
   <% end %>
-<div>
+<% end %>
+
+
 
