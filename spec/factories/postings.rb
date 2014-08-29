@@ -21,6 +21,6 @@ FactoryGirl.define do
     unit { %w(lbs pounds flats quarts pints bushels).sample }
     price_per_unit { rand(1.0..40.0) }
     starting_date { ((Date.today - 4.weeks)..(Date.today + 2.weeks)).to_a.sample }
-    expiration_date { starting_date + rand(15).days }
+    expiration_date { starting_date + (rand(15) + 2).days }
   end
 end
