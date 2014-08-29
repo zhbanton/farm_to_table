@@ -12,12 +12,11 @@ end
 
 Farm.all.each do |farm|
   farm.products = FactoryGirl.create_list(:product, rand(12))
-  business_days_array = [BusinessDay.create!(day: 'Monday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM')),
-                        BusinessDay.create!(day: 'Tuesday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM')),
-                        BusinessDay.create!(day: 'Thursday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM')).
-                        BusinessDay.create!(day: 'Friday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM')),
-                        BusinessDay.create!(day: 'Saturday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM'))]
-  farm.business_days = business_days_array
+  BusinessDay.create!(farm_id: farm.id, day: 'Monday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM'))
+  BusinessDay.create!(farm_id: farm.id, day: 'Tuesday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM'))
+  BusinessDay.create!(farm_id: farm.id, day: 'Thursday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM'))
+  BusinessDay.create!(farm_id: farm.id, day: 'Friday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM'))
+  BusinessDay.create!(farm_id: farm.id, day: 'Saturday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM'))
 end
 
 Product.all.each do |product|
