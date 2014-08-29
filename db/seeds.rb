@@ -12,7 +12,11 @@ end
 
 Farm.all.each do |farm|
   farm.products = FactoryGirl.create_list(:product, rand(12))
-  farm.business_days = [BusinessDay.create!(day: 'Monday')]
+  farm.business_days = [BusinessDay.create!(day: 'Monday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM')),
+                        BusinessDay.create!(day: 'Tuesday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM')),
+                        BusinessDay.create!(day: 'Thursday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM')).
+                        BusinessDay.create!(day: 'Friday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM')),
+                        BusinessDay.create!(day: 'Saturday', opening_time: Time.parse('5:30AM'), closing_time: Time.parse('6:30PM'))]
 end
 
 Product.all.each do |product|
