@@ -1,19 +1,38 @@
 <h3>Current Order</h3>
 <% if @order.order_items.present? %>
+  <div class='new-order-heading row'>
+    <div class='col-md-3'></div>
+    <div class='col-md-4'><p class='new-order-table-heading'>Quantity Remaining</p></div>
+    <div class='col-md-1'><p class='new-order-table-heading'>Pickup Date</p></div>
+    <div class='col-md-1'><p class='new-order-table-heading'>Order Quantity</p></div>
+  </div>
   <% @order.order_items_by_farm.each do |farm, items| %>
-    <h5><%= farm.capitalize %></h5>
-      <% items.each do |item| %>
+    <h4><%= farm.capitalize %></h4>
+      <% items.each_with_index do |item| %>
         <%= form_for item do |f| %>
           <div class='listing' data-posting=<%= item.posting.id %> data-order-item=<%= item.id %>>
-            <span><%= name_and_variety_to_s(item.posting.product) %> |</span>
-            <span>quantity remaining: <%= "#{item.posting.quantity_remaining_without_current_order(item.order)} #{item.posting.unit.pluralize}" %> |</span>
-            <span><%= quantity_per_unit(item) %> |</span>
-            <span class='pickup-day'><%= f.select :pickup_date, available_pickup_days_select(item.posting, Date.tomorrow), include_blank: true %></span>
-            <span><%= f.number_field :quantity, step: 0.5, class: 'quantity' %>|</span>
-            <span class='action-buttons'>
-              <button type='button' class='update-order-item btn btn-primary'>Update</button>
-              <button type='button' class='remove-order-item-order-page btn btn-danger'>Remove</button>
-            </span>
+            <div class='listing-row row'>
+              <div class='col-md-1'></div>
+              <div class='col-md-2'>
+                <%= name_and_variety_to_s(item.posting.product) %>
+              </div>
+              <div class='col-md-2'>
+                <strong><%= "#{item.posting.quantity_remaining_without_current_order(item.order)} #{item.posting.unit.pluralize}" %></strong>
+              </div>
+              <div class='col-md-2'>
+                <%= quantity_per_unit(item) %>
+              </div>
+              <div class='pickup-day col-md-1'>
+                <%= f.select :pickup_date, available_pickup_days_select(item.posting, Date.tomorrow), include_blank: true %>
+              </div>
+              <div class='col-md-1'>
+                <%= f.number_field :quantity, step: 0.5, class: 'quantity' %>
+              </div>
+              <div class='action-buttons col-md-3'>
+                <button type='button' class='update-order-item btn btn-primary'>Update</button>
+                <button type='button' class='remove-order-item-order-page btn btn-danger'>Remove</button>
+              </div>
+            </div>
           </div>
         <% end %>
       <% end %>

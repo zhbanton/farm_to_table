@@ -86,12 +86,25 @@ body {
   text: white;
 }
 
-.listing {
-  margin: 0 auto;
+.quantity {
+  width: 100%;
 }
 
-.listing-name {
-  width: 200px;
+.listing-row {
+  margin-bottom: 5px;
+}
+
+.add-order-item {
+  width: 38%;
+}
+
+.new-order-table-heading, .order-table-heading {
+  color: #759595;
+  font-weight: bold;
+}
+
+.new-order-table-heading {
+  margin-bottom: -80px;
 }
 
 

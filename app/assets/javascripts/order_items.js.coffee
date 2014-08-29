@@ -86,7 +86,7 @@
   $form.parents('.listing').find('#order_item_quantity').val('')
   $form.parents('.listing').find('#order_item_pickup_date').val('')
   $form.children().remove()
-  $form.append $('<button>').text('Add').addClass('add-order-item btn btn-success')
+  $form.append $('<button>').text('Add to Order').addClass('add-order-item btn btn-success')
 
 @validationFailure = (errors, $form) ->
   errorString = $.map(errors, (messages, attribute) ->
