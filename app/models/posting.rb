@@ -22,7 +22,6 @@ class Posting < ActiveRecord::Base
   validates :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
   validates :quantity, numericality: { greater_than: 0 }
   validates :quantity, format: { with: /\A\d+([.,][05]?)?\z/, message: "must be whole or half unit" }
-  validates :product, presence: true
   validate :starting_date_before_ending_date
   validate :starting_date_within_two_months
 
