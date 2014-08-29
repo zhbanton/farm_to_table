@@ -20,7 +20,6 @@ class ProductsController < ApplicationController
     @product = @farm.products.new(product_params)
 
     if @product.save
-      raise 'new'
       redirect_to farm_products_path(@farm), notice: "#{@product.name} created"
     else
       render :new
