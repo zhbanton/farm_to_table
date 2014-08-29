@@ -15,7 +15,7 @@ class BusinessDay < ActiveRecord::Base
 
   belongs_to :farm
 
-  validates_uniqueness_of :day, scope: :farm
+  validates_uniqueness_of :day, { scope: :farm_id }
   validate :opening_before_closing
 
   private
