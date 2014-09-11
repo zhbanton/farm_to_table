@@ -115,7 +115,7 @@ body {
 
 .homepage {
   background-image: url('/blueberries_and_peaches.jpg');
-  background-size: 100%;
+  background-size: 120%;
   background-repeat: no-repeat;
   color: white;
   text-align: center;
@@ -123,6 +123,22 @@ body {
   font-family: 'Roboto Slab', serif;
   padding: 120px 0 120px 0;
   margin-top: 120px;
+}
+
+.feature {
+  img {
+    height: 100px;
+    width: auto;
+    vertical-align: middle;
+  }
+  p {
+    margin-top: 20px;
+    vertical-align: middle;
+  }
+}
+
+.features {
+  margin-top: 100px;
 }
 
 
