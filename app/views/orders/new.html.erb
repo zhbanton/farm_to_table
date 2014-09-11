@@ -4,9 +4,10 @@
       <div class='row'>
         <div class='col-md-1'></div>
         <div class='col-md-2'><h4><%= farm.capitalize %></h4></div>
-        <div class='col-md-4'><p class='order-table-heading'>Quantity Remaining</p></div>
-        <div class='col-md-1'><p class='order-table-heading'>Pickup Date</p></div>
-        <div class='col-md-1'><p class='order-table-heading'>Order Quantity</p></div>
+        <div class='col-md-2'><p class='order-table-heading'>Price</p></div>
+        <div class='col-md-1'><p class='order-table-heading'>In-Stock</p></div>
+        <div class='col-md-2'><p class='order-table-heading'>Pickup Date</p></div>
+        <div class='col-md-2'><p class='order-table-heading'>Order Quantity</p></div>
       </div>
     <% else %>
       <div class='row'>
@@ -23,27 +24,31 @@
               <%= name_and_variety_to_s(item.posting.product) %>
             </div>
             <div class='col-md-2'>
-              <strong><%= "#{item.posting.quantity_remaining_without_current_order(item.order)} #{item.posting.unit.pluralize}" %></strong>
-            </div>
-            <div class='col-md-2'>
               <%= quantity_per_unit(item) %>
             </div>
-            <div class='pickup-day col-md-1'>
+            <div class='col-md-1'>
+              <%= item.posting.quantity_remaining_without_current_order(item.order) %>
+            </div>
+            <div class='pickup-day col-md-2'>
               <%= f.select :pickup_date, available_pickup_days_select(item.posting, Date.tomorrow), include_blank: true %>
             </div>
             <div class='col-md-1'>
               <%= f.number_field :quantity, step: 0.5, class: 'quantity' %>
             </div>
             <div class='action-buttons col-md-3'>
-              <button type='button' class='update-order-item btn btn-primary'>Update</button>
-              <button type='button' class='remove-order-item-order-page btn btn-danger'>Remove</button>
+              <button type='button' class='update-order-item btn btn-primary'>Update</button><button type='button' class='remove-order-item-order-page btn btn-danger'>Remove</button>
             </div>
           </div>
         </div>
       <% end %>
     <% end %>
   <% end %>
-  <%= button_to 'complete order', organization_order_path(current_user.role, @order), method: :patch, data: {confirm: "Are you sure you want to complete your order?  You will not be able to go back and edit it once it is completed."}, class: 'btn btn-success order-button' %>
+  <div class='row'>
+    <div class='col-md-9'></div>
+    <div class='col-md-3'>
+      <%= button_to 'complete order', organization_order_path(current_user.role, @order), method: :patch, data: {confirm: "Are you sure you want to complete your order?  You will not be able to go back and edit it once it is completed."}, class: 'btn btn-success order-button' %>
+    </div>
+  </div>
 <% else %>
   <p>You haven't selected any products yet</p>
 <% end %>
