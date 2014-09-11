@@ -43,7 +43,7 @@ class Posting < ActiveRecord::Base
 
   def available_pickup_days_after_given_date(date)
     return false if self.expiration_date < date
-    (self.starting_date..self.expiration_date).find_all do |day|
+    (date..self.expiration_date).find_all do |day|
       product.farm.business_days.map(&:day).include? day.strftime("%A")
     end
   end
