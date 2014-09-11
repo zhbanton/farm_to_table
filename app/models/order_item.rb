@@ -24,6 +24,7 @@ class OrderItem < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0 }
   validates :quantity, format: { with: /\A\d+([.,][05]?)?\z/, message: "must be whole or half unit" }
   validate :quantity_remaining_greater_than_zero
+  validate :pickup_date_after_today
   validates_uniqueness_of :order_id, scope: :posting_id
 
   def total_cost
@@ -31,6 +32,12 @@ class OrderItem < ActiveRecord::Base
   end
 
   private
+
+  def pickup_date_after_today
+    if self.pickup_date < Date.today
+      errors.add(:pickup_date, "cannot be before today's date")
+    end
+  end
 
   def quantity_remaining_greater_than_zero
     if self.quantity.present?
