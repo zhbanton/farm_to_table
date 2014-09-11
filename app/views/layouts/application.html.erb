@@ -14,9 +14,7 @@
     <%= render 'navbars/organization_nav' %>
   <% end %>
 <% else %>
-  <%= link_to 'sign in', new_user_session_path %> |
-  <%= link_to 'sign up as a farm', farm_sign_up_path %> |
-  <%= link_to 'sign up as an organization', organization_sign_up_path %>
+  <%= render 'navbars/new_user_nav' %>
 <% end %>
 
 <% flash.each do |name, msg| %>
