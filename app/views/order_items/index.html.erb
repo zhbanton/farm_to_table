@@ -6,9 +6,10 @@
     </div>
     <div class='row'>
       <div class='col-md-3'></div>
-      <div class='col-md-4'><p class='order-table-heading'>Quantity Remaining</p></div>
-      <div class='col-md-1'><p class='order-table-heading'>Pickup Date</p></div>
-      <div class='col-md-1'><p class='order-table-heading'>Order Quantity</p></div>
+      <div class='col-md-2'><p class='order-table-heading'>Price</p></div>
+      <div class='col-md-1'><p class='order-table-heading'>In-Stock</p></div>
+      <div class='col-md-2'><p class='order-table-heading'>Pickup Date</p></div>
+      <div class='col-md-2'><p class='order-table-heading'>Order Quantity</p></div>
     </div>
     <% farm.active_postings_with_order(@order).each do |posting| %>
       <%= form_for setup_order_item(@order, posting) do |f| %>
@@ -19,12 +20,12 @@
               <%= name_and_variety_to_s(posting.product) %>
             </div>
             <div class='col-md-2'>
-              <strong><%= "#{posting.quantity_remaining_without_current_order(f.object.order)} #{posting.unit.pluralize}" %></strong>
-            </div>
-            <div class='col-md-2'>
               <%= quantity_per_unit(posting) %>
             </div>
-            <div class='pickup-day col-md-1'>
+            <div class='col-md-1'>
+              <%= posting.quantity_remaining_without_current_order(f.object.order) %>
+            </div>
+            <div class='pickup-day col-md-2'>
               <%= f.select :pickup_date, available_pickup_days_select(posting, Date.tomorrow), include_blank: true %>
             </div>
             <div class='col-md-1'>

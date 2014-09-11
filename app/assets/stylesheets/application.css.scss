@@ -87,7 +87,7 @@ body {
 }
 
 .quantity {
-  width: 100%;
+  width: 70px;
 }
 
 .listing-row {
@@ -95,12 +95,13 @@ body {
 }
 
 .add-order-item {
-  width: 38%;
+  width: 150px;
 }
 
 .new-order-table-heading, .order-table-heading {
   color: #759595;
-  font-weight: bold;
+  font-style: italic;
+  font-size: 12px;
 }
 
 .new-order-table-heading {
@@ -111,5 +112,6 @@ body {
   margin-top: 10px;
   margin-left: 78.3%;
 }
+
 
 
