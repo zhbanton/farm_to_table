@@ -21,7 +21,7 @@
 
 FactoryGirl.define do
   factory :product do
-    name { %w( Strawberries Blueberries Potatoes Kale Lettuce Chard Tomatoes Corn Eggs Peaches Scallions Onions Garlic Zucchini Squash Cheese Pork Chicken Beef Cilantro Basil Sage Oregano Thyme Nectarines Plums Watermelon Yams Broccoli Okra Cat).sample }
+    name { %w( Strawberries Blueberries Potatoes Kale Lettuce Chard Tomatoes Corn Eggs Peaches Scallions Onions Garlic Zucchini Squash Cheese Pork Chicken Beef Cilantro Basil Sage Oregano Thyme Nectarines Plums Watermelon Yams Broccoli Okra).sample }
     variety { %w(great ok).sample }
     description { Faker::Lorem.sentence }
     organic { [true, false].sample }
