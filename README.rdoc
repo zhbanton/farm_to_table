@@ -1,28 +1,17 @@
-== README
+=FarmToTable
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+http://farm-to-table.herokuapp.com/
 
-Things you may want to cover:
+FarmToTable is a web application that connects farms with restaurants and other organizations that want to buy local produce.  It is the final project I completed as a student at General Assembly's Web Development Immersive Program.
 
-* Ruby version
+Sign in as <b>farm@example.com (password: 'password')</b> to view an example of a farm populated with data, <b>restaurant@example.com (password: 'password')</b> to view an example of a restaurant, or feel free to create your own account!
 
-* System dependencies
+==Farms:
 
-* Configuration
+* Sign up with some information about your business and the days and hours you plan to be available for organizations to come pick up orders directly to your farm.
+* Create, view, and edit all the products your farm grows/sells.  Optionally specify a default price and unit at which the product is most often sold.
+* Put your products on the market by creating new postings.  Specify a unit, a price per unit, a starting data, and an expiration date past which the posting is no longer seen on the market.  If you specify a default price and unit on your product, those fields will be automatically filled in for you.  Otherwise, they will default to the price and unit for your most recent posting on that product.
+* View your incoming orders, grouped by date and by the organization coming to pick the items up from you.  Work the payment out directly between you and the organization- we take no cut!
 
-* Database creation
+==Organizations:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
