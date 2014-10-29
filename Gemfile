@@ -38,6 +38,10 @@ gem 'faker'
 
 gem 'gmaps4rails'
 
+gem 'paperclip'
+
+gem 'aws-sdk'
+
 group :production do
   gem 'rails_12factor'
 end
@@ -52,6 +56,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
+  gem 'dotenv-rails'
 end
 
 group :test do
