@@ -1,8 +1,8 @@
 <% @farms.each do |farm| %>
   <% if farm.active_postings_with_order(@order).present? %>
-    <div class='row'>
+    <div class='row farm' data-farm=<%= farm.id %>>
       <div class='col-md-1'></div>
-      <div class='col-md-6'><h4><%= farm.user.name.capitalize %></h4></div>
+      <div class='col-md-11'><h4 class="farm-name"><%= farm.user.name.capitalize %></h4></div>
     </div>
     <div class='row'>
       <div class='col-md-3'></div>

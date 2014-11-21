@@ -1,6 +1,6 @@
 class PostingSerializer < ActiveModel::Serializer
 
-  attributes :id, :starting_date, :expiration_date, :name, :variety, :image_url, :qualifications
+  attributes :id, :expiration_date, :name, :variety, :image_url, :qualifications
 
   def expiration_date
     "#{object.expiration_date.to_formatted_s(:long_ordinal)}"
