@@ -2,35 +2,92 @@
 
   <%= render 'shared/errors', object: @product %>
 
-  <%= f.label :name %><br>
-  <%= f.text_field :name %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :name, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.text_field :name %>
+    </div>
+  </div>
   <br>
-  <%= f.label :variety %><br>
-  <%= f.text_field :variety %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :variety, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.text_field :variety %>
+    </div>
+  </div>
   <br>
-  <%= f.label :image %><br>
-  <%= f.file_field :image %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :image, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.file_field :image %>
+    </div>
+  </div>
   <br>
-  <%= f.label :description %><br>
-  <%= f.text_area :description %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :description, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.text_area :description %>
+    </div>
+  </div>
   <br>
-  <%= f.label :default_price %><br>
-  <%= f.text_field :default_price, precision: 8, scale: 2 %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :default_price, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.text_field :default_price %>
+    </div>
+  </div>
   <br>
-  <%= f.label :default_unit %><br>
-  <%= f.text_field :default_unit %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :default_unit, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.text_field :default_unit %>
+    </div>
+  </div>
   <br>
-  <%= f.label :organic %>
-  <%= f.check_box :organic %>
-
-  <%= f.label :non_gmo, 'non-gmo' %>
-  <%= f.check_box :non_gmo %>
-
-  <%= f.label :no_spray, 'no-spray' %>
-  <%= f.check_box :no_spray %>
-
-  <%= f.label :low_spray, 'low-spray' %>
-  <%= f.check_box :low_spray %><br>
-
-  <%= f.submit %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :organic, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.check_box :organic %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :non_gmo, "Non-gmo", class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.check_box :non_gmo %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :no_spray, "No-spray", class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.check_box :no_spray %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :low_spray, "Low-spray", class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.check_box :low_spray %>
+    </div>
+  </div>
+  <br>
+  <div class="form-submit"><%= f.submit 'Create Product', class: 'btn btn-primary' %></div>
 <% end %>
