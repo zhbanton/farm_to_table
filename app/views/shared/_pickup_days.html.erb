@@ -4,14 +4,13 @@
     <% farm.each do |farm| %>
       <h5><%= farm.first.capitalize %></h5>
       <table class='table table-striped'>
-        <thead>
+        <tr>
           <th>product</th>
           <th>quantity</th>
           <th>price</th>
           <th>total price</th>
           <th>ordered on</th>
-        </thead>
-        <tbody>
+        </tr>
         <% farm.last.each do |item| %>
           <tr>
             <td><%= name_and_variety_to_s(item.posting.product) %></td>
@@ -21,7 +20,6 @@
             <td><%= item.order.created_at.to_formatted_s(:long_ordinal) %></td>
           </tr>
         <% end %>
-        </tbody>
       </table>
       <p>farm total: <%= number_to_currency(farm.last.map(&:total_cost).reduce(:+)) %></p>
     <% end %>

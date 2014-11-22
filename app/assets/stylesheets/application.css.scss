@@ -24,6 +24,16 @@ textarea {
   padding: 40px 30px 40px 30px;
 }
 
+.product-image {
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 7px;
+}
+
+.centered {
+  text-align: center;
+}
+
 $bgDefault      : #58b56a;
 $bgHighlight    : #54a662;
 $colDefault     : #ecf0f1;
@@ -85,6 +95,7 @@ body {
   border: 2px solid red;
   padding: 7px;
   padding-bottom: 0;
+  margin: 0 auto;
   margin-bottom: 20px;
   background-color: #f0f0f0;
   h2 {

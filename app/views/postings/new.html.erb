@@ -1,31 +1,56 @@
+<h3 class="page-heading">New Posting for <%= name_and_variety_to_s(@product) %></h3>
 <%= render 'shared/errors', object: @posting %>
-
-<%= render 'shared/product_heading', product: @product %>
-
-<%= render 'shared/active_and_inactive_postings_list', product: @product %>
 
 <div class='row'>
   <div class='col-md-12'>
      <%= form_for [@product, set_posting_default_price_and_unit(@posting)] do |f| %>
-      <%= f.label :quantity%><br>
-      <%= f.number_field :quantity, step: 0.5 %>
-      <br>
-      <%= f.label :unit %><br>
-      <%= f.text_field :unit %>
-      <br>
-      <%= f.label :price_per_unit %><br>
-      <%= f.text_field :price_per_unit, precision: 8, scale: 2 %>
-      <br>
-      <%= f.label :starting_date %>
-      <%= f.date_field :starting_date, value: Date.today, min: Date.today %>
-      <br>
-      <%= f.label :expiration_date %>
-      <%= f.date_field :expiration_date, min: Date.today %>
-      <br>
-      <%= f.submit %>
+     <div class="row">
+       <div class="col-xs-5">
+         <%= f.label :quantity, class: 'form-label' %>
+       </div>
+       <div class="col-xs-7">
+         <%= f.text_field :quantity %>
+       </div>
+     </div>
+     <br>
+     <div class="row">
+       <div class="col-xs-5">
+         <%= f.label :unit, class: 'form-label' %>
+       </div>
+       <div class="col-xs-7">
+         <%= f.text_field :unit %>
+       </div>
+     </div>
+     <br>
+     <div class="row">
+       <div class="col-xs-5">
+         <%= f.label :price_per_unit, class: 'form-label' %>
+       </div>
+       <div class="col-xs-7">
+         <%= f.text_field :price_per_unit %>
+       </div>
+     </div>
+     <br>
+     <div class="row">
+      <div class="col-xs-5">
+        <%= f.label :starting_date, class: 'form-label' %>
+      </div>
+      <div class="col-xs-7">
+        <%= f.date_field :starting_date, value: Date.today, min: Date.today %>
+      </div>
+     </div>
+     <br>
+     <div class="row">
+      <div class="col-xs-5">
+        <%= f.label :expiration_date, class: 'form-label' %>
+      </div>
+      <div class="col-xs-7">
+        <%= f.date_field :expiration_date, min: Date.today %>
+      </div>
+     </div>
+     <br>
+      <div class="form-submit"><%= f.submit 'Create Posting', class: 'btn btn-primary' %></div>
     <% end %>
-
-    <%= link_to 'back', farm_products_path(@product.farm) %>
   </div>
 </div>
 
