@@ -1,6 +1,25 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  font-family: 'Roboto Slab', serif;
+  background: #F3F8F3;
+}
+
+a {
+  color: #808080;
+}
+
+a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+.container {
+  background: #fff;
+  padding: 40px 30px 40px 30px;
+}
+
 $bgDefault      : #58b56a;
 $bgHighlight    : #54a662;
 $colDefault     : #ecf0f1;
@@ -140,3 +159,15 @@ body {
   margin: 100px 0 100px 0;
 }
 
+.btn a {
+  color: white
+}
+
+.product-links {
+  text-align: right;
+}
+
+.centered-table {
+  text-align: center;
+  width: 25%;
+}

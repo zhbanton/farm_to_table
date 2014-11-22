@@ -29,4 +29,8 @@ module ActivePosting
     end
   end
 
+  def last_posting
+    postings.order(:starting_date).last
+  end
+
 end
