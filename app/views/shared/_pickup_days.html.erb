@@ -1,10 +1,10 @@
 <% if pickup_days.present? %>
-  <% pickup_days.each do |day, farm| %>
+  <% pickup_days.each do |day, business| %>
     <h3><%= format_date(day) %></h3>
-    <% farm.each do |farm| %>
-      <h4 class="farm-name"><%= farm.first.capitalize %></h4>
-      <table class='table table-striped order-table'>
-        <tr>
+    <% business.each do |business| %>
+      <h4 class="business-name"><%= business.first.capitalize %></h4>
+      <table class='table order-table'>
+        <tr class="order-heading">
           <th>product</th>
           <th>variety</th>
           <th>quantity</th>
@@ -12,7 +12,7 @@
           <th>total price</th>
           <th>ordered on</th>
         </tr>
-        <% farm.last.each do |item| %>
+        <% business.last.each do |item| %>
           <tr>
             <td><%= item.posting.product.name %></td>
             <td><%= item.posting.product.variety %></td>
@@ -23,9 +23,19 @@
           </tr>
         <% end %>
       </table>
-      <span class="total-text farm-total">FARM TOTAL: </span><span class="total-number farm-total-number"><%= number_to_currency(farm.last.map(&:total_cost).reduce(:+)) %></span>
+      <table class="table total-table">
+        <tr>
+          <td><strong>SUBTOTAL: </strong></td>
+          <td class="subtotal"><%= number_to_currency(business.last.map(&:total_cost).reduce(:+)) %></td>
+        </tr>
+      </table>
     <% end %>
-    <span class="total-text">DAY TOTAL: </span><span class="total-number day-total-number"><%= number_to_currency(@pickup_days[day].map { |day| day.last }.flatten.map(&:total_cost).reduce(:+)) %></span>
+    <table class="table total-table">
+      <tr>
+        <td><strong>DAY TOTAL: </strong></td>
+        <td class="order-total"><%= number_to_currency(@pickup_days[day].map { |day| day.last }.flatten.map(&:total_cost).reduce(:+)) %></td>
+      </tr>
+    </table>
   <% end %>
 <% else %>
   <p>You have no active orders</p>
