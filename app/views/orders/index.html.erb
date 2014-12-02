@@ -1,4 +1,4 @@
-<h3>Active Orders</h3>
+<h3 class="page-heading">Active Orders</h3>
 <% if @orders.present? %>
   <% @orders.each do |order| %>
     <h3><%= order.created_at.to_formatted_s(:long_ordinal) %></h3>
