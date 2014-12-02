@@ -14,4 +14,5 @@
   <p class="centered">there are no past postings for this product</p>
 <% end %>
 
-<button class="btn btn-primary"><%= link_to 'create new posting', new_product_posting_path(@product) %></button>
+<button class="btn btn-primary"><%= link_to 'edit product', edit_farm_product_path(@product.farm, @product) %></button>
+<button class="btn btn-success"><%= link_to 'create new posting', new_product_posting_path(@product) %></button>

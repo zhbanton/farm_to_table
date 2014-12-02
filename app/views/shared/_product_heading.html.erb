@@ -1,10 +1,9 @@
 <h3 class="page-heading"><%= name_and_variety_to_s(product) %></h3>
 <div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-3">
-    <p><%= image_tag product.image.url(:square), class: "product-image" %></p>
+  <div class="product-image col-md-3 col-sm-6 ">
+    <p><%= image_tag product.image.url(:square)%></p>
   </div>
-  <div class="col-md-3">
+  <div class="product-description col-md-6">
     <p><%= simple_format(product.description) %></p>
     <p><%= qualifications_to_s(product) %></p>
   </div>

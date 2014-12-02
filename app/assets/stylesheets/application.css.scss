@@ -24,7 +24,11 @@ textarea {
   padding: 40px 30px 40px 30px;
 }
 
-.product-image {
+.product-image p {
+  text-align: center;
+}
+
+.product-image img {
   border-width: 2px;
   border-style: solid;
   border-radius: 7px;
