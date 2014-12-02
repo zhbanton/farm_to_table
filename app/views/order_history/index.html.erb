@@ -1,5 +1,13 @@
-<% @orders.each do |order| %>
-  <div>
-    <%= link_to order.created_at.to_formatted_s(:long_ordinal), organization_order_path(current_user.role, order) %>
-  </div>
-<% end %>
+<h3 class="page-heading">Order History</h3>
+<table class="table table-striped history-table">
+  <tr>
+    <th>ORDER DATE</th>
+    <th>FARMS</th>
+  </tr>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= link_to format_order_date_short(order), organization_order_path(current_user.role, order) %></td>
+      <td><%= order.farms.join(', ') %></td>
+    </tr>
+  <% end %>
+</table>

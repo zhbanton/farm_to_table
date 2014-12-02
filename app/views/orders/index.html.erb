@@ -1,7 +1,7 @@
 <h3 class="page-heading">Active Orders (by order date)</h3>
 <% if @orders.present? %>
   <% @orders.each do |order| %>
-    <h3><%= order.created_at.to_date.to_formatted_s(:long_ordinal) %> at <%= order.created_at.to_time.strftime("%-I:%M %p")%> </h3>
+    <h3><%= format_order_date_long(order) %> </h3>
     <%= render 'order_view', order: order %>
   <% end %>
 <% else %>
