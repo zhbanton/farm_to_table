@@ -1,4 +1,4 @@
-<h3 class="page-heading">Sign up</h3>
+<h3 class="page-heading">Sign Up</h3>
 <%
   if params.has_key?(:user) && params[:user].has_key?(:user_type) && User::USER_TYPES.include?(params[:user][:user_type].downcase)
     user_type = params[:user][:user_type].downcase

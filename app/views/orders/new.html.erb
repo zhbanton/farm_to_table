@@ -40,6 +40,6 @@
   <% end %>
     <%= button_to 'complete order', organization_order_path(current_user.role, @order), method: :patch, data: {confirm: "Are you sure you want to complete your order?  You will not be able to go back and edit it once it is completed."}, class: 'btn btn-success order-button' %>
 <% else %>
-  <p>You haven't selected any products yet</p>
+  <p class="centered">You haven't selected any products yet.</p>
 <% end %>
 
