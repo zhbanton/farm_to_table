@@ -1,25 +1,35 @@
 <% order.order_items_by_farm.each do |farm, items| %>
-  <h5><%= farm.capitalize %></h5>
-  <table class='table table-striped'>
-    <thead>
+  <h4 class="business-name"><%= farm.capitalize %></h5>
+  <table class='table order-table'>
+    <tr class="order-heading">
       <th>product</th>
+      <th>variety</th>
       <th>quantity</th>
       <th>price</th>
       <th>total price</th>
       <th>pickup date</th>
-    </thead>
-    <tbody>
+    </tr>
     <% items.each do |item| %>
       <tr>
-        <td><%= name_and_variety_to_s(item.posting.product) %></td>
+        <td><%= item.posting.product.name %></td>
+        <td><%= item.posting.product.variety %></td>
         <td><%= quantity_to_s(item) %></td>
         <td><%= quantity_per_unit(item) %></td>
         <td><%= number_to_currency(item.total_cost) %></td>
         <td><%= item.pickup_date %></td>
       <tr>
     <% end %>
-    </tbody>
   </table>
-  <p>farm total: <%= number_to_currency(items.map(&:total_cost).reduce(:+)) %>
+  <table class="table total-table">
+    <tr>
+      <td><strong>SUBTOTAL: </strong></td>
+      <td class="subtotal"><%= number_to_currency(items.map(&:total_cost).reduce(:+)) %></td>
+    </tr>
+  </table>
 <% end %>
-<p>subtotal: <%= number_to_currency(order.subtotal) %></p>
+<table class="table total-table">
+  <tr>
+    <td><strong>ORDER TOTAL: </strong></td>
+    <td class="order-total"><%= number_to_currency(order.subtotal) %></td>
+  </tr>
+</table>

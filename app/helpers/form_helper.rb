@@ -69,4 +69,12 @@ ActionView::Helpers::NumberHelper
     Date.parse(date).to_formatted_s(:long_ordinal)
   end
 
+  def format_order_date_long(order)
+    "#{order.created_at.to_date.to_formatted_s(:long_ordinal)} (#{order.created_at.to_time.strftime("%-I:%M %p")})"
+  end
+
+  def format_order_date_short(order)
+    "#{order.created_at.to_date.to_formatted_s} (#{order.created_at.to_time.strftime("%-I:%M %p")})"
+  end
+
 end

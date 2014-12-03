@@ -35,6 +35,10 @@ class Order < ActiveRecord::Base
     order_items.map(&:total_cost).reduce(0, &:+)
   end
 
+  def farms
+    order_items.map { |item| item.posting.product.farm.user.name }.inject(Hash.new(0)) { |h,v| h[v] += 1; h }.sort_by { |k,v| v }.reverse.map { |arr| arr[0] }
+  end
+
   private
 
   def order_items_with_farm

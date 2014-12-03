@@ -1,6 +1,9 @@
-<div>
-  <div>
-    <%= f.label :business_type %> <br>
+<div class="row">
+  <div class="col-xs-5">
+    <%= f.label :business_type, class: "form-label" %>
+  </div>
+  <div class="col-xs-7">
     <%= f.select :business_type, Organization::BUSINESS_TYPES %>
   </div>
 </div>
+<br>

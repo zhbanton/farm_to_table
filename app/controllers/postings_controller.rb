@@ -5,6 +5,10 @@ class PostingsController < ApplicationController
   before_action :set_posting, only: :show # [:edit, :update, :destroy]
   respond_to :json
 
+  def default_serializer_options
+    {root: false}
+  end
+
   def index
     @farm = current_user.role
   end

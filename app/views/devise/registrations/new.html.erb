@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h3 class="page-heading">Sign Up</h3>
 <%
   if params.has_key?(:user) && params[:user].has_key?(:user_type) && User::USER_TYPES.include?(params[:user][:user_type].downcase)
     user_type = params[:user][:user_type].downcase
@@ -12,26 +12,39 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= my_devise_error_messages! %>
 
-  <div>
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :email, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.email_field :email, autofocus: true %>
+    </div>
   </div>
-
-  <div>
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+  <br>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :password, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
   </div>
-
-  <div>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <br>
+  <div class="row">
+    <div class="col-xs-5">
+      <%= f.label :password_confirmation, class: 'form-label' %>
+    </div>
+    <div class="col-xs-7">
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
   </div>
+  <br>
 
   <%= render 'shared_user_info', f: f, user_type: user_type %>
 
   <%= hidden_field :user, :user_type, value: user_type %>
 
-  <div><%= f.submit "Sign up" %></div>
+  <div class="form-submit"><%= f.submit 'sign up', class: 'btn btn-primary' %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>

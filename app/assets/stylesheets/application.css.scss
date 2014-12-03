@@ -1,7 +1,54 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-$bgDefault      : #58b56a;
+body {
+  font-family: 'Roboto Slab', serif;
+  background: #F3F8F3;
+}
+
+a:link, a:visited {
+  color: #808080;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+
+textarea {
+  height: 150px;
+  width: 300px;
+}
+.container {
+  background: #fff;
+  padding: 40px 30px 40px 30px;
+}
+
+.product-image p {
+  text-align: center;
+}
+
+.product-image img {
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 7px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.form-note {
+  margin-left: 10px;
+}
+
+.remember-me {
+  margin-left: 10px;
+}
+
+$bgDefault      : #006B24;
 $bgHighlight    : #54a662;
 $colDefault     : #ecf0f1;
 $colHighlight   : #fffdf9;
@@ -62,6 +109,7 @@ body {
   border: 2px solid red;
   padding: 7px;
   padding-bottom: 0;
+  margin: 0 auto;
   margin-bottom: 20px;
   background-color: #f0f0f0;
   h2 {
@@ -81,36 +129,25 @@ body {
   }
 }
 
-.navbar {
-  background: green;
-  text: white;
+.page-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-submit {
+  text-align: center;
 }
 
 .quantity {
   width: 70px;
 }
 
-.listing-row {
-  margin-bottom: 5px;
-}
-
 .add-order-item {
-  width: 150px;
-}
-
-.new-order-table-heading, .order-table-heading {
-  color: #759595;
-  font-style: italic;
-  font-size: 12px;
-}
-
-.new-order-table-heading {
-  margin-bottom: -80px;
+  width: 154.5px;
 }
 
 .order-button {
   margin-top: 10px;
-  margin-left: 28px;
 }
 
 .homepage {
@@ -140,3 +177,92 @@ body {
   margin: 100px 0 100px 0;
 }
 
+.btn a {
+  color: white
+}
+
+.product-links {
+  text-align: right;
+}
+
+.centered-table {
+  text-align: center;
+  width: 25%;
+}
+
+.form-label {
+  float: right;
+}
+
+.order-table td {
+  width: 16.67%
+}
+
+.business-name {
+  margin-top: 20px;
+}
+
+.order-heading th {
+  color: #759595;
+  font-style: italic;
+  font-size: 12px;
+  font-weight: normal;
+  background: #F3F8F3;
+}
+
+.total-table {
+  width: 33.34%;
+}
+
+.total-table td {
+  width: 50%;
+}
+
+.subtotal {
+  color: #246B24;
+}
+
+.order-total {
+  color: #B2B200;
+}
+
+.history-table {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.history-table td {
+  width: 50%;
+}
+
+.additional-farm-info {
+  font-size: 13px;
+  margin-left: 10px;
+  background: #000;
+  color: #fff;
+  padding: 3px 3px 3px 3px;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.farm-name {
+  a:link, a:hover, a:visited, a:active {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+.farm-info, .product-info {
+  background: #E2E2D4;
+  padding: 15px 5px 5px 15px;
+}
+
+.product-info img {
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.business-days-table {
+  width: 35%;
+  margin: 0 auto;
+}

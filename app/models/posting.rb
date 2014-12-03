@@ -19,7 +19,10 @@ class Posting < ActiveRecord::Base
   belongs_to :farm
   has_many :order_items, dependent: :destroy
 
-  validates :unit, :price_per_unit, :starting_date, :expiration_date, presence: true
+  validates :unit, presence: true
+  validates :quantity, presence: true
+  validates :starting_date, presence: true
+  validates :expiration_date, presence: true
   validates :quantity, numericality: { greater_than: 0 }
   validates :quantity, format: { with: /\A\d+([.,][05]?)?\z/, message: "must be whole or half unit" }
   validate :starting_date_before_ending_date
@@ -60,14 +63,18 @@ class Posting < ActiveRecord::Base
   private
 
   def starting_date_before_ending_date
-    if self.starting_date >= self.expiration_date
-      errors.add(:expiration_date, "cannot be on or before starting date")
+    if self.starting_date.present? && self.expiration_date.present?
+      if self.starting_date >= self.expiration_date
+        errors.add(:expiration_date, "cannot be on or before starting date")
+      end
     end
   end
 
   def starting_date_within_two_months
-    if self.starting_date > Date.today + 2.months
-      errors.add(:starting_date, "cannot be more than two months from now")
+    if self.starting_date.present?
+      if self.starting_date > Date.today + 2.months
+        errors.add(:starting_date, "cannot be more than two months from now")
+      end
     end
   end
 

@@ -42,6 +42,10 @@ gem "paperclip", "~> 4.2"
 
 gem 'aws-sdk', '~> 1.5.7'
 
+gem 'handlebars_assets'
+
+gem 'active_model_serializers'
+
 group :production do
   gem 'rails_12factor'
 end

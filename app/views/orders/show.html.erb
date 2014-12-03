@@ -1,2 +1,2 @@
-<h3>Order For <%= @order.created_at.to_formatted_s(:long_ordinal) %></h3>
+<h3 class="page-heading">Order For <%= format_order_date_long(@order) %></h3>
 <%= render 'order_view', order: @order %>

@@ -1,5 +1,18 @@
 <%= render 'shared/product_heading', product: @product %>
 
-<%= render 'shared/active_and_inactive_postings_list', product: @product %>
+<h3 class="page-heading">Active Postings</h3>
+<% if @product.active_postings.present? %>
+  <%= render 'shared/postings_list', postings: @product.active_postings_by_date %>
+<% else %>
+  <p class="centered">there are no active postings for this product</p>
+<% end %>
 
-<%= link_to 'back', farm_products_path(@product.farm) %>
+<h3 class="page-heading">Past Postings</h3>
+<% if @product.inactive_postings.present? %>
+  <%= render 'shared/postings_list', postings: @product.inactive_postings %>
+<% else %>
+  <p class="centered">there are no past postings for this product</p>
+<% end %>
+
+<button class="btn btn-primary"><%= link_to 'edit product', edit_farm_product_path(@product.farm, @product) %></button>
+<button class="btn btn-success"><%= link_to 'create new posting', new_product_posting_path(@product) %></button>

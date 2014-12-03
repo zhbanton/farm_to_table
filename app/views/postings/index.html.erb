@@ -1,13 +1,13 @@
-<h3>Active Postings</h3>
+<h3 class="page-heading">Active Postings</h3>
 <% if @farm.active_postings_by_date.present? %>
   <%= render 'shared/postings_list', postings: @farm.active_postings_by_date %>
 <% else %>
-  <p>You don't have any active postings.</p>
+  <p class="centered">You don't have any active postings.</p>
 <% end %>
 
-<h3>Past Postings</h3>
+<h3 class="page-heading">Past Postings</h3>
 <% if @farm.inactive_postings.present? %>
   <%= render 'shared/postings_list', postings: @farm.inactive_postings %>
 <% else %>
-  <p>You don't have any past postings.</p>
+  <p class="centered">You don't have any past postings.</p>
 <% end %>

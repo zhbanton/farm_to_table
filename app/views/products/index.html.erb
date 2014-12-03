@@ -1,13 +1,24 @@
-<h3>Products</h3>
-<ul>
+<h3 class="page-heading">Products</h3>
+<table class="table table-striped">
+  <tr>
+    <th>NAME</th>
+    <th class="centered-table">VARIETY</th>
+    <th class="centered-table">LAST POSTING</th>
+    <th></th>
+  </tr>
   <% @products.each do |product| %>
-    <%= link_to name_and_variety_to_s(product), farm_product_path(@farm, product) %> |
-    <%= link_to 'edit', edit_farm_product_path(@farm, product) %> |
-    <%= link_to 'delete', farm_product_path(@farm, product), method: :delete, data: {confirm: "Are you sure you want to delete #{product.name}?"} %> |
-    <%= link_to 'create new posting', new_product_posting_path(product) %>
-    <br>
+    <tr>
+      <td><%= link_to product.name, farm_product_path(@farm, product) %></td>
+      <td class="centered-table"><%= product.variety %></td>
+      <td class="centered-table"><%= product.last_posting.present? ? product.last_posting.starting_date.to_formatted_s : '-' %></td>
+      <td class="product-links">
+        <button class="btn btn-primary"><%= link_to 'edit', edit_farm_product_path(@farm, product) %></button>
+        <button class="btn btn-danger"><%= link_to 'delete', farm_product_path(@farm, product), method: :delete, data: {confirm: "Are you sure you want to delete #{product.name}?"} %></button>
+        <button class="btn btn-success"><%= link_to 'create new posting', new_product_posting_path(product) %></button>
+      </td>
+    </tr>
   <% end %>
-</ul>
+</table>
 
-<%= link_to 'create new product', new_farm_product_path(@farm) %>
+<button class="btn btn-success"><%= link_to 'create new product', new_farm_product_path(@farm) %></button>
 

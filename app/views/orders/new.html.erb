@@ -1,55 +1,45 @@
 <% if @order.order_items.present? %>
-  <% @order.order_items_by_farm.each_with_index do |(farm, items), index| %>
-    <% if index == 0 %>
-      <div class='row'>
-        <div class='col-md-1'></div>
-        <div class='col-md-2'><h4><%= farm.capitalize %></h4></div>
-        <div class='col-md-2'><p class='order-table-heading'>Price</p></div>
-        <div class='col-md-1'><p class='order-table-heading'>In-Stock</p></div>
-        <div class='col-md-2'><p class='order-table-heading'>Pickup Date</p></div>
-        <div class='col-md-2'><p class='order-table-heading'>Order Quantity</p></div>
-      </div>
-    <% else %>
-      <div class='row'>
-        <div class='col-md-1'></div>
-        <div class='col-md-6'><h4><%= farm.capitalize %></h4></div>
-      </div>
-    <% end %>
-      <% items.each_with_index do |item| %>
+  <% @order.order_items_by_farm.each do |farm, items| %>
+    <div class='farm'>
+      <h4 class="farm-name"><%= farm %><h4>
+    </div>
+    <table class="table order-table">
+      <tr class="order-heading">
+        <th>product</th>
+        <th>price</th>
+        <th>in-stock</th>
+        <th>pickup date</th>
+        <th>order quantity</th>
+        <th></th>
+      </tr>
+      <% items.each do |item| %>
       <%= form_for item do |f| %>
-        <div class='listing' data-posting=<%= item.posting.id %> data-order-item=<%= item.id %>>
-          <div class='listing-row row'>
-            <div class='col-md-1'></div>
-            <div class='col-md-2'>
-              <%= name_and_variety_to_s(item.posting.product) %>
-            </div>
-            <div class='col-md-2'>
-              <%= quantity_per_unit(item) %>
-            </div>
-            <div class='col-md-1'>
-              <%= item.posting.quantity_remaining_without_current_order(item.order) %>
-            </div>
-            <div class='pickup-day col-md-2'>
-              <%= f.select :pickup_date, available_pickup_days_select(item.posting, Date.tomorrow), include_blank: true %>
-            </div>
-            <div class='col-md-1'>
-              <%= f.number_field :quantity, step: 0.5, class: 'quantity' %>
-            </div>
-            <div class='action-buttons col-md-3'>
-              <button type='button' class='update-order-item btn btn-primary'>Update</button><button type='button' class='remove-order-item-order-page btn btn-danger'>Remove</button>
-            </div>
-          </div>
-        </div>
+        <tr class='listing' data-posting=<%= item.posting.id %> data-order-item=<%= item.id %>>
+          <td class='product-name'>
+            <a href="#"><%= name_and_variety_to_s(item.posting.product) %></a>
+          </td>
+          <td>
+            <%= quantity_per_unit(item) %>
+          </td>
+          <td>
+            <%= item.posting.quantity_remaining_without_current_order(item.order) %>
+          </td>
+          <td class='pickup-day'>
+            <%= f.select :pickup_date, available_pickup_days_select(item.posting, Date.tomorrow), include_blank: true %>
+          </td>
+          <td>
+            <%= f.number_field :quantity, step: 0.5, class: 'quantity' %>
+          </td>
+          <td class='action-buttons'>
+            <button type='button' class='update-order-item btn btn-primary'>update</button><button type='button' class='remove-order-item-order-page btn btn-danger'>remove</button>
+          </td>
+        </tr>
       <% end %>
     <% end %>
+    </table>
   <% end %>
-  <div class='row'>
-    <div class='col-md-9'></div>
-    <div class='col-md-3'>
-      <%= button_to 'complete order', organization_order_path(current_user.role, @order), method: :patch, data: {confirm: "Are you sure you want to complete your order?  You will not be able to go back and edit it once it is completed."}, class: 'btn btn-success order-button' %>
-    </div>
-  </div>
+    <%= button_to 'complete order', organization_order_path(current_user.role, @order), method: :patch, data: {confirm: "Are you sure you want to complete your order?  You will not be able to go back and edit it once it is completed."}, class: 'btn btn-success order-button' %>
 <% else %>
-  <p>You haven't selected any products yet</p>
+  <p class="centered">You haven't selected any products yet.</p>
 <% end %>
 

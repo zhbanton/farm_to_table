@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get 'organization/sign_up', to: 'registrations#new', user: { user_type: 'organization' }
   end
 
-  resources :farms, only: [] do
+  resources :farms, only: :show do
     resources :products
     resources :postings, only: [:index]
     resources :farm_pickup_days, only: [:index]

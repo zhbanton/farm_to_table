@@ -1,15 +1,25 @@
-<div>
-  <div>
-    <%= f.label :minimum_order %> <br>
-    <%= f.text_field :minimum_order %>
+<div class="row">
+  <div class="col-xs-5">
+    <%= f.label :minimum_order, class: 'form-label' %>
   </div>
-  <div>
-    <%= f.fields_for :business_days, @business_days do |bd| %>
-      <%= bd.label :day, bd.object.day %>
-      <%= bd.hidden_field :day, value: bd.object.day %>
-      <%= bd.select :opening_time, available_hours %>
-      <%= bd.select :closing_time, available_hours %>
-      <br>
-    <% end %>
+  <div class="col-xs-7">
+    <%= f.number_field :minimum_order %>
   </div>
 </div>
+<br>
+<h4 class="centered">Business Hours</h4>
+<p class="centered">Specify the days and hours you are available for pick-ups</p>
+<br>
+<table class="table business-days-table">
+  <%= f.fields_for :business_days, @business_days do |bd| %>
+    <tr>
+      <td>
+        <%= bd.label :day, bd.object.day %>
+        <%= bd.hidden_field :day, value: bd.object.day %>
+      </td>
+      <td><%= bd.select :opening_time, available_hours %></td>
+      <td><%= bd.select :closing_time, available_hours %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
