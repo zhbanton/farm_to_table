@@ -78,15 +78,15 @@
 @addEditAndRemove = (data, $form) ->
   $form.parents('.listing').data('order-item', data.id)
   $form.children().remove()
-  $form.append $('<button>').text('Update').addClass('update-order-item btn btn-primary')
-  $form.append $('<button>').text('Remove').addClass('remove-order-item btn btn-danger')
+  $form.append $('<button>').text('update').addClass('update-order-item btn btn-primary')
+  $form.append $('<button>').text('remove').addClass('remove-order-item btn btn-danger')
 
 @addAddButton = (data, $form) ->
   $form.parents('.listing').removeData('order-item')
   $form.parents('.listing').find('#order_item_quantity').val('')
   $form.parents('.listing').find('#order_item_pickup_date').val('')
   $form.children().remove()
-  $form.append $('<button>').text('Add to Order').addClass('add-order-item btn btn-success')
+  $form.append $('<button>').text('add to order').addClass('add-order-item btn btn-success')
 
 @validationFailure = (errors, $form) ->
   errorString = $.map(errors, (messages, attribute) ->
