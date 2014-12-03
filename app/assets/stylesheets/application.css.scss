@@ -244,3 +244,18 @@ body {
     text-decoration: none;
   }
 }
+
+.farm-info, .product-info {
+  background: #E2E2D4;
+  padding: 15px 5px 5px 15px;
+}
+
+.product-info img {
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.business-days-table {
+  width: 35%;
+  margin: 0 auto;
+}

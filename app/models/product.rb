@@ -29,7 +29,8 @@ class Product < ActiveRecord::Base
     thumb: '100x100>',
     square: '200x200#',
     medium: '300x300>'
-  }
+  },
+  default_url: "/images/:style/missing.png"
 
   belongs_to :farm
   has_many :postings

@@ -1,23 +1,39 @@
-<div>
-  <%= f.label :name %><br />
-  <%= f.text_field :name %>
+<div class="row">
+  <div class="col-xs-5">
+    <%= f.label :name, class: 'form-label' %>
+  </div>
+  <div class="col-xs-7">
+    <%= f.text_field :name %>
+  </div>
 </div>
-
-<div>
-  <%= f.label :description %><br />
-  <%= f.text_area :description %>
+<br>
+<div class="row">
+  <div class="col-xs-5">
+    <%= f.label :description, class: 'form-label' %>
+  </div>
+  <div class="col-xs-7">
+    <%= f.text_area :description %>
+  </div>
 </div>
-
-<div>
-  <%= f.label :website %><br />
-  <%= f.url_field :website %>
+<br>
+<div class="row">
+  <div class="col-xs-5">
+    <%= f.label :website, class: 'form-label' %>
+  </div>
+  <div class="col-xs-7">
+    <%= f.url_field :website %>
+  </div>
 </div>
-
-<div>
-  <%= f.label :phone_number %><br />
-  <%= f.telephone_field :phone_number %>
+<br>
+<div class="row">
+  <div class="col-xs-5">
+    <%= f.label :phone_number, class: 'form-label' %>
+  </div>
+  <div class="col-xs-7">
+    <%= f.telephone_field :phone_number %>
+  </div>
 </div>
-
+<br>
 <div>
   <%= fields_for setup_role(resource.role) do |rf| %>
     <% render "#{user_type}_fields", f: rf %>
