@@ -1,48 +1,46 @@
 <% @farms.each do |farm| %>
   <% if farm.active_postings_with_order(@order).present? %>
-    <div class='row farm' data-farm=<%= farm.id %>>
-      <div class='col-md-1'></div>
-      <div class='col-md-11'><h4 class="farm-name"><%= farm.user.name.capitalize %></h4></div>
+    <div class='farm' data-farm=<%= farm.id %>>
+      <h4 class="farm-name"><a href="#"><%= farm.user.name.capitalize %><span class="glyphicon glyphicon-plus additional-farm-info"></span></a></h4>
     </div>
-    <div class='row'>
-      <div class='col-md-3'></div>
-      <div class='col-md-2'><p class='order-table-heading'>Price</p></div>
-      <div class='col-md-1'><p class='order-table-heading'>In-Stock</p></div>
-      <div class='col-md-2'><p class='order-table-heading'>Pickup Date</p></div>
-      <div class='col-md-2'><p class='order-table-heading'>Order Quantity</p></div>
-    </div>
-    <% farm.active_postings_with_order(@order).each do |posting| %>
-      <%= form_for setup_order_item(@order, posting) do |f| %>
-        <div class='listing' data-posting=<%= posting.id %> <% if f.object.persisted? %> data-order-item=<%= f.object.id %><% end %>>
-          <div class="listing-row row">
-            <div class="col-md-1">
-            </div>
-            <div class='product-name col-md-2'>
-              <%= name_and_variety_to_s(posting.product) %>
-            </div>
-            <div class='col-md-2'>
+    <table class="table order-table">
+      <tr class="order-heading">
+        <th>product</th>
+        <th>price</th>
+        <th>in-stock</th>
+        <th>pickup date</th>
+        <th>order quantity</th>
+        <th></th>
+      </tr>
+      <% farm.active_postings_with_order(@order).each do |posting| %>
+        <%= form_for setup_order_item(@order, posting) do |f| %>
+          <tr class='listing' data-posting=<%= posting.id %> <% if f.object.persisted? %> data-order-item=<%= f.object.id %><% end %>>
+            <td class='product-name'>
+              <a href="#"><%= name_and_variety_to_s(posting.product) %></a>
+            </td>
+            <td>
               <%= quantity_per_unit(posting) %>
-            </div>
-            <div class='col-md-1'>
+            </td>
+            <td>
               <%= posting.quantity_remaining_without_current_order(f.object.order) %>
-            </div>
-            <div class='pickup-day col-md-2'>
+            </td>
+            <td class='pickup-day'>
               <%= f.select :pickup_date, available_pickup_days_select(posting, Date.tomorrow), include_blank: true %>
-            </div>
-            <div class='col-md-1'>
+            </td>
+            <td>
               <%= f.number_field :quantity, step: 0.5, class: 'quantity' %>
-            </div>
-            <div class='action-buttons col-md-3'>
+            </td>
+            <td class='action-buttons'>
               <% if f.object.persisted? %>
                 <button type='button' class='update-order-item btn btn-primary'>Update</button><button type='button' class='remove-order-item btn btn-danger'>Remove</button>
               <% else %>
                 <button type='button' class='add-order-item btn btn-success'>Add to Order</button>
               <% end %>
-            </div>
-          </div>
-        </div>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
+    </table>
     <br>
   <% end %>
 <% end %>

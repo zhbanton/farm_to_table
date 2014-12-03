@@ -6,14 +6,16 @@ body {
   background: #F3F8F3;
 }
 
-a {
+a:link, a:visited {
   color: #808080;
+  text-decoration: none;
 }
 
 a:hover {
   color: #000;
   text-decoration: none;
 }
+
 
 textarea {
   height: 150px;
@@ -38,7 +40,7 @@ textarea {
   text-align: center;
 }
 
-$bgDefault      : #58b56a;
+$bgDefault      : #006B24;
 $bgHighlight    : #54a662;
 $colDefault     : #ecf0f1;
 $colHighlight   : #fffdf9;
@@ -119,11 +121,6 @@ body {
   }
 }
 
-.navbar {
-  background: green;
-  text: white;
-}
-
 .page-heading {
   text-align: center;
   margin-bottom: 20px;
@@ -137,27 +134,13 @@ body {
   width: 70px;
 }
 
-.listing-row {
-  margin-bottom: 5px;
-}
-
 .add-order-item {
-  width: 150px;
-}
-
-.new-order-table-heading, .order-table-heading {
-  color: #759595;
-  font-style: italic;
-  font-size: 12px;
-}
-
-.new-order-table-heading {
-  margin-bottom: -80px;
+  width: 154.5px;
 }
 
 .order-button {
   margin-top: 10px;
-  margin-left: 28px;
+  margin-left: 86.7%;
 }
 
 .homepage {
@@ -243,4 +226,21 @@ body {
 
 .history-table td {
   width: 50%;
+}
+
+.additional-farm-info {
+  font-size: 13px;
+  margin-left: 10px;
+  background: #000;
+  color: #fff;
+  padding: 3px 3px 3px 3px;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.farm-name {
+  a:link, a:hover, a:visited, a:active {
+    color: #000;
+    text-decoration: none;
+  }
 }
