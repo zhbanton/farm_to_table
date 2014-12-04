@@ -34,8 +34,10 @@ class OrderItem < ActiveRecord::Base
   private
 
   def pickup_date_after_today
-    if self.pickup_date < Date.today
-      errors.add(:pickup_date, "cannot be before today's date")
+    if self.pickup_date.present?
+      if self.pickup_date < Date.today
+        errors.add(:pickup_date, "cannot be before today's date")
+      end
     end
   end
 
