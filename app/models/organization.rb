@@ -29,7 +29,7 @@ class Organization < ActiveRecord::Base
         create_or_add_to_farm_name(items_by_pickup, item)
       else
         items_by_pickup[item.pickup_date.to_s] = {}
-        items_by_pickup[item.pickup_date.to_s][item.farm_name] = [item]
+        items_by_pickup[item.pickup_date.to_s][Farm.find(item.farm_id)] = [item]
       end
     end
     items_by_pickup
@@ -38,17 +38,17 @@ class Organization < ActiveRecord::Base
   private
 
   def order_items_with_farm
-    order_items.select('users.name as farm_name, order_items.*')
+    order_items.select('farms.id as farm_id, order_items.*')
     .joins(posting: {product: {farm: :user}})
     .where('orders.is_completed = true AND order_items.pickup_date >= ?', Date.today)
     .order('order_items.pickup_date', 'products.name', 'products.variety')
   end
 
   def create_or_add_to_farm_name(items_by_pickup, item)
-    if items_by_pickup[item.pickup_date.to_s].has_key? item.farm_name
-      items_by_pickup[item.pickup_date.to_s][item.farm_name] << item
+    if items_by_pickup[item.pickup_date.to_s].has_key? Farm.find(item.farm_id)
+      items_by_pickup[item.pickup_date.to_s][Farm.find(item.farm_id)] << item
     else
-      items_by_pickup[item.pickup_date.to_s][item.farm_name] = [item]
+      items_by_pickup[item.pickup_date.to_s][Farm.find(item.farm_id)] = [item]
     end
   end
 

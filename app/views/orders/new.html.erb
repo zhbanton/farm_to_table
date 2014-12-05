@@ -1,7 +1,7 @@
 <% if @order.order_items.present? %>
   <% @order.order_items_by_farm.each do |farm, items| %>
-    <div class='farm'>
-      <h4 class="farm-name"><%= farm %><h4>
+    <div class='farm' data-farm=<%= farm.id %>>
+      <h4 class="farm-name"><a href="#"><%= farm.user.name.capitalize %><span class="glyphicon glyphicon-plus additional-farm-info"></span></a></h4>
     </div>
     <table class="table order-table">
       <tr class="order-heading">
