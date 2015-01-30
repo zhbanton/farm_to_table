@@ -1,2 +1,48 @@
 <h3 class="page-heading">Active Orders (by pick-up date)</h3>
-<%= render 'shared/pickup_days', pickup_days: @pickup_days %>
+<% if @pickup_days.present? %>
+  <% @pickup_days.each do |day, farm| %>
+    <h3><%= format_date(day) %></h3>
+    <% farm.each do |farm| %>
+      <div class='farm' data-farm=<%= farm.first.id %>>
+        <h4 class="farm-name"><a href="#"><%= farm.first.user.name.capitalize %><span class="glyphicon glyphicon-plus additional-farm-info"></span></a>
+        </h4>
+      </div>
+      <table class='table order-table'>
+        <tr class="order-heading">
+          <th>product</th>
+          <th>variety</th>
+          <th>quantity</th>
+          <th>price</th>
+          <th>total price</th>
+          <th>ordered on</th>
+        </tr>
+        <% farm.last.each do |item| %>
+          <tr class='listing' data-posting=<%= item.posting.id %>>
+            <td class='product-name'>
+              <a href="#"><%= item.posting.product.name %></a>
+            </td>
+            <td><%= item.posting.product.variety %></td>
+            <td><%= quantity_to_s(item) %></td>
+            <td><%= quantity_per_unit(item) %></td>
+            <td><%= number_to_currency(item.total_cost) %></td>
+            <td><%= item.order.created_at.to_date.to_formatted_s %></td>
+          </tr>
+        <% end %>
+      </table>
+      <table class="table total-table">
+        <tr>
+          <td><strong>SUBTOTAL: </strong></td>
+          <td class="subtotal"><%= number_to_currency(farm.last.map(&:total_cost).reduce(:+)) %></td>
+        </tr>
+      </table>
+    <% end %>
+    <table class="table total-table">
+      <tr>
+        <td><strong>DAY TOTAL: </strong></td>
+        <td class="order-total"><%= number_to_currency(@pickup_days[day].map { |day| day.last }.flatten.map(&:total_cost).reduce(:+)) %></td>
+      </tr>
+    </table>
+  <% end %>
+<% else %>
+  <p class="centered">You have no active orders.</p>
+<% end %>

@@ -1,5 +1,8 @@
 <% order.order_items_by_farm.each do |farm, items| %>
-  <h4 class="business-name"><%= farm.capitalize %></h5>
+  <div class='farm' data-farm=<%= farm.id %>>
+    <h4 class="farm-name"><a href="#"><%= farm.user.name.capitalize %><span class="glyphicon glyphicon-plus additional-farm-info"></span></a>
+    </h4>
+  </div>
   <table class='table order-table'>
     <tr class="order-heading">
       <th>product</th>
@@ -10,8 +13,10 @@
       <th>pickup date</th>
     </tr>
     <% items.each do |item| %>
-      <tr>
-        <td><%= item.posting.product.name %></td>
+      <tr class='listing' data-posting=<%= item.posting.id %>>
+        <td class='product-name'>
+          <a href="#"><%= item.posting.product.name %></a>
+        </td>
         <td><%= item.posting.product.variety %></td>
         <td><%= quantity_to_s(item) %></td>
         <td><%= quantity_per_unit(item) %></td>

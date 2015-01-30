@@ -22,10 +22,10 @@ class Order < ActiveRecord::Base
   def order_items_by_farm
     items_by_farm = {}
     order_items_with_farm.each do |item|
-      if items_by_farm.has_key? item.farm_name
-        items_by_farm[item.farm_name] << item
+      if items_by_farm.has_key? Farm.find(item.farm_id)
+        items_by_farm[Farm.find(item.farm_id)] << item
       else
-        items_by_farm[item.farm_name] = [item]
+        items_by_farm[Farm.find(item.farm_id)] = [item]
       end
     end
     items_by_farm
@@ -42,7 +42,7 @@ class Order < ActiveRecord::Base
   private
 
   def order_items_with_farm
-    order_items.select('users.name as farm_name, order_items.*')
+    order_items.select('farms.id as farm_id, order_items.*')
     .joins(posting: {product: {farm: :user}})
     .order('products.name', 'products.variety')
   end
